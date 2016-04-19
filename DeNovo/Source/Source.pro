@@ -18,6 +18,7 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     digraph.h \
     igraph.h \
-    abstractiterator.h
+    abstractiterator.h \
+    euleriancircuit.h
 
 FORMS    += mainwindow.ui
