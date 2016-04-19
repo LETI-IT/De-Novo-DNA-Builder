@@ -17,6 +17,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     digraph.h \
-    igraph.h
+    igraph.h \
+    abstractiterator.h
 
 FORMS    += mainwindow.ui
