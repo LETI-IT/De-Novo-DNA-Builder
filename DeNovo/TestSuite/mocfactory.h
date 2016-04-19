@@ -1,8 +1,11 @@
 #ifndef MOCFACTORY
 #define MOCFACTORY
 #include "../Source/igraph.h"
+#include "mockiterator.hpp"
 
-class MocGraph:public IGraph
+#define vertex_type int
+
+class MocGraph : public IGraph<vertex_type>
 {
 public:
     virtual void add_link(vertex_type v1, vertex_type v2){
@@ -26,7 +29,12 @@ public:
     virtual bool is_reach(vertex_type start, vertex_type finish) {
         return true;
     }
+
+    virtual const AbstractIterator<int>& iterator() {
+        return MockIterator<int>();
+    }
 };
+
 
 class GraphFactory
 {
@@ -36,7 +44,7 @@ private:
 public:
     ~GraphFactory(){};
 
-    static IGraph* newInstance(int graphType=0) {
+    static IGraph<vertex_type>* newInstance(int graphType=0) {
         if(graphType==0)
             return new MocGraph(); //the test graph
         else

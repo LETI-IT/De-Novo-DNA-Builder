@@ -14,6 +14,7 @@ CONFIG   -= app_bundle
 
 
 TEMPLATE = app
-HEADERS += mocfactory.h
+HEADERS += mocfactory.h \
+    mockiterator.hpp
 SOURCES += tst_testsuitetest.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
