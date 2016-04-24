@@ -27,18 +27,41 @@ void Digraph<Vertex>::add_links(istream &stm)
 template<typename Vertex>
 bool Digraph<Vertex>::is_linked(Vertex v1, Vertex v2)
 {
+    vector<Vertex> neighbors = adjacency(v1);
+    for (typename vector<Vertex>::iterator it = neighbors.begin(); it != neighbors.end(); ++it)
+    {
+        if (v2 == *it) return true;
+    }
     return false;
 }
 
 template<typename Vertex>
 vector<Vertex> Digraph<Vertex>::adjacency(Vertex v)
 {
-    return std::vector<Vertex>();
+    return digraph[v];
 }
 
 template<typename Vertex>
 bool Digraph<Vertex>::is_reach(Vertex start, Vertex finish)
 {
+    if (start == finish) return true;
+
+    vector<Vertex> neighbors = adjacency(start);
+    queue<Vertex> achievable;
+
+    fill_achievable(neighbors, achievable);
+
+    while (!achievable.empty())
+    {
+        Vertex v = achievable.front();
+        achievable.pop();
+        if (finish == v) return true;
+        else
+        {
+            vector<Vertex> neighbors = adjacency(v);
+            fill_achievable(neighbors, achievable);
+        }
+    }
     return false;
 }
 
@@ -47,6 +70,15 @@ const AbstractIterator<Vertex>& Digraph<Vertex>::iterator()
 {
     AbstractIterator<Vertex> * it = new DigraphIterator<Vertex>();
     return *it;
+}
+
+template<typename Vertex>
+void Digraph<Vertex>::fill_achievable(vector<Vertex> &v, queue<Vertex> &q)
+{
+    for (typename vector<Vertex>::iterator it = v.begin(); it != v.end(); ++it)
+    {
+        q.push(*it);
+    }
 }
 
 template class Digraph<int>;

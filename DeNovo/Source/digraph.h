@@ -2,6 +2,7 @@
 #define DIGRAPH
 #include <map>
 #include <vector>
+#include <queue>
 #include <iostream>
 #include <sstream>
 
@@ -14,6 +15,8 @@ class Digraph : public IGraph<Vertex>
 {
 private:
     map<Vertex, vector<Vertex> > digraph;
+
+    void fill_achievable(vector<Vertex> &v, queue<Vertex> &q);
 
 public:
     Digraph();

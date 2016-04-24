@@ -21,5 +21,24 @@ int main(int argc, char *argv[])
     std::istringstream stm(str);
     p_digraph->add_links(stm);
 
+
+//for test: linked vertex.
+//    bool check1 = p_digraph->is_linked(1, 8); // is linked.
+//    bool check2 = p_digraph->is_linked(1, 9); // isn't linked.
+//    cout << "result ckecked: " << check1 << ", " << check2 << endl;
+
+
+//for test: adjacency vertex.
+//    vector<int> neighs = p_digraph->adjacency(1);
+//     cout << "adjacency: ";
+//    for (vector<int>::iterator it = neighs.begin(); it != neighs.end(); ++it)
+//       cout << *it << " ";
+//    cout << endl;
+
+
+    //for test: reached vertex.
+//    bool check3 = p_digraph->is_reach(1, 10);
+//    cout << "reached: " << check3 << endl;
+
     return a.exec();
 }
