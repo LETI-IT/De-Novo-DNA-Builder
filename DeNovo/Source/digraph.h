@@ -1,41 +1,32 @@
-//
-// Created by Alexander on 10.04.2016.
-//
-
-//#ifndef DE_NOVO_DNA_BUILDER_DIGRAPH_H
-//#define DE_NOVO_DNA_BUILDER_DIGRAPH_H
-//
-//#endif //DE_NOVO_DNA_BUILDER_DIGRAPH_H
-
-/**
-  1.fix it for MinGw or MSVC
-  2.support interface IGraph
-**/
-
+#ifndef DIGRAPH
+#define DIGRAPH
 #include <map>
 #include <vector>
 #include <iostream>
 #include <sstream>
 
+#include "igraph.h"
+
 using namespace std;
 
-//template<typename T> using adjacency_list_type = map<T, vector<T>>;
-//typedef int vertex_type;
-//typedef adjacency_list_type<vertex_type> adjacency_list;
+template<typename Vertex>
+class Digraph : public IGraph<Vertex>
+{
+private:
+    map<Vertex, vector<Vertex> > digraph;
 
-//class digraph
-//{
-//private:
-//    adjacency_list _digraph;
+public:
+    Digraph();
+    ~Digraph();
 
-//public:
-//    digraph();
-//    ~digraph();
+    void add_link(Vertex v1, Vertex v2);
+    void add_links(istream& stm);
 
-//    void add_link(vertex_type v1, vertex_type v2);
-//    void add_links(istream& stm);
+    bool is_linked(Vertex v1, Vertex v2);
+    vector<Vertex> adjacency(Vertex v);
+    bool is_reach(Vertex start, Vertex finish);
 
-//    bool is_linked(vertex_type v1, vertex_type v2);
-//    vector<vertex_type> adjacency(vertex_type v);
-//    bool is_reach(vertex_type start, vertex_type finish);
-//};
+    const AbstractIterator<Vertex>& iterator();
+};
+
+#endif // DIGRAPH

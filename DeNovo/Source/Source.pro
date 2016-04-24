@@ -13,11 +13,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    digraph.cpp
+    digraph.cpp \
+    digraphiterator.cpp
 
 HEADERS  += mainwindow.h \
     digraph.h \
     igraph.h \
+    digraphiterator.h \
     abstractiterator.h \
     euleriancircuit.h
 

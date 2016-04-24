@@ -1,39 +1,56 @@
-//
-// Created by Alexander on 10.04.2016.
-//
-
 #include "digraph.h"
+#include "digraphiterator.h"
 
-//digraph::digraph() { }
+template<typename Vertex>
+Digraph<Vertex>::Digraph() {}
 
-//digraph::~digraph() { }
+template<typename Vertex>
+Digraph<Vertex>::~Digraph() {}
 
-//void digraph::add_link(vertex_type v1, vertex_type v2)
-//{
-//    _digraph[v1].push_back(v2);
-//    _digraph[v2];
+template<typename Vertex>
+void Digraph<Vertex>::add_link(Vertex v1, Vertex v2)
+{
+    digraph[v1].push_back(v2);
+    digraph[v2];
 
-//    cout << "add vertices: " << v1 << ", " << v2 << endl;
-//}
+    cout << "add vertices: " << v1 << ", " << v2 << endl;
+}
 
-//void digraph::add_links(istream &stm)
-//{
-//    vertex_type v1, v2;
-//    while (stm >> v1 >> v2)
-//        add_link(v1, v2);
-//}
+template<typename Vertex>
+void Digraph<Vertex>::add_links(istream &stm)
+{
+    Vertex v1, v2;
+    while (stm >> v1 >> v2)
+        add_link(v1, v2);
+}
 
-//bool digraph::is_linked(vertex_type v1, vertex_type v2) {
-//    return false;
-//}
+template<typename Vertex>
+bool Digraph<Vertex>::is_linked(Vertex v1, Vertex v2)
+{
+    return false;
+}
 
-//vector<vertex_type> digraph::adjacency(vertex_type v) {
-//    return std::vector<vertex_type>();
-//}
+template<typename Vertex>
+vector<Vertex> Digraph<Vertex>::adjacency(Vertex v)
+{
+    return std::vector<Vertex>();
+}
 
-//bool digraph::is_reach(vertex_type start, vertex_type finish) {
-//    return false;
-//}
+template<typename Vertex>
+bool Digraph<Vertex>::is_reach(Vertex start, Vertex finish)
+{
+    return false;
+}
+
+template<typename Vertex>
+const AbstractIterator<Vertex>& Digraph<Vertex>::iterator()
+{
+    AbstractIterator<Vertex> * it = new DigraphIterator<Vertex>();
+    return *it;
+}
+
+template class Digraph<int>;
+
 
 
 
