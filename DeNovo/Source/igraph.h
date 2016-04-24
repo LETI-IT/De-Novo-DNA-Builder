@@ -22,7 +22,7 @@ public:
     virtual vector<Vertex> adjacency(Vertex v)=0;
     virtual bool is_reach(Vertex start, Vertex finish)=0;
 
-    virtual const AbstractIterator<int>& iterator() = 0;
+    virtual AbstractIterator<Vertex>* iterator() = 0;
 
 };
 

@@ -30,8 +30,8 @@ public:
         return true;
     }
 
-    virtual const AbstractIterator<int>& iterator() {
-        return MockIterator<int>();
+    virtual AbstractIterator<int>* iterator() {
+        return new MockIterator<int>();
     }
 };
 

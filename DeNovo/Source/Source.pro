@@ -13,12 +13,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    digraph.cpp
+    digraph.cpp \
+    graphview.cpp \
+    vertex2d.cpp
 
 HEADERS  += mainwindow.h \
     digraph.h \
     igraph.h \
     abstractiterator.h \
-    euleriancircuit.h
+    euleriancircuit.h \
+    graphview.h \
+    vertex2d.h
 
 FORMS    += mainwindow.ui
