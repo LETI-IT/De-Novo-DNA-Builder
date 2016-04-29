@@ -42,8 +42,17 @@ int main(int argc, char *argv[])
 //    cout << "reached: " << check3 << endl;
 
 
-    cout << "foreach" << endl;
+//for test: iterable edges.
+    cout << "foreach edge" << endl;
     for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
+    {
+        cout << **it << endl;
+    }
+
+
+//for test: iterable vertexes.
+    cout << "foreach vertex" << endl;
+    for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); **it != **p_digraph->end(VERTEX); ++*it)
     {
         cout << **it << endl;
     }

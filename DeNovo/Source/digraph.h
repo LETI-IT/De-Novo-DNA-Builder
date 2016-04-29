@@ -9,30 +9,31 @@
 
 #include "igraph.h"
 #include "edgeiterator.h"
+#include "vertexiterator.h"
 
 using namespace std;
 
-template<typename Vertex>
-class Digraph : public IGraph<Vertex>
+template<typename T>
+class Digraph : public IGraph<T>
 {
 private:
-    map<Vertex, vector<Vertex> > digraph;
+    map<T, vector<T> > digraph;
 
-    void fill_achievable(vector<Vertex> &v, queue<Vertex> &q);
+    void fill_achievable(vector<T> &v, queue<T> &q);
 
 public:
     Digraph();
     ~Digraph();
 
-    void add_link(Vertex v1, Vertex v2);
+    void add_link(T v1, T v2);
     void add_links(istream& stm);
 
-    bool is_linked(Vertex v1, Vertex v2);
-    vector<Vertex> adjacency(Vertex v);
-    bool is_reach(Vertex start, Vertex finish);
+    bool is_linked(T v1, T v2);
+    vector<T> adjacency(T v);
+    bool is_reach(T start, T finish);
 
-    AbstractIterator<Vertex>* begin(TypeIterator);
-    AbstractIterator<Vertex>* end(TypeIterator);
+    AbstractIterator<T>* begin(TypeIterator);
+    AbstractIterator<T>* end(TypeIterator);
 };
 
 #endif // DIGRAPH

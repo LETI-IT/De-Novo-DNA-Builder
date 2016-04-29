@@ -15,7 +15,9 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     digraph.cpp \
     edgeiterator.cpp \
-    edge.cpp
+    edge.cpp \
+    vertexiterator.cpp \
+    vertex.cpp
 
 HEADERS  += mainwindow.h \
     digraph.h \
@@ -25,6 +27,8 @@ HEADERS  += mainwindow.h \
     edgeiterator.h \
     abstractcomponent.h \
     edge.h \
-    typeiterator.h
+    typeiterator.h \
+    vertexiterator.h \
+    vertex.h
 
 FORMS    += mainwindow.ui
