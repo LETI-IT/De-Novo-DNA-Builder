@@ -5,11 +5,13 @@
 #include <sstream>
 #include <map>
 #include "abstractiterator.h"
+#include "typeiterator.h"
 using namespace std;
 
 /**
  * @brief The IGraph class is interface for graph structure
  */
+
 template<typename Vertex>
 class IGraph
 {
@@ -24,10 +26,10 @@ public:
     virtual vector<Vertex> adjacency(Vertex v)=0;
     virtual bool is_reach(Vertex start, Vertex finish)=0;
 
-
-    virtual AbstractIterator<Vertex>* begin() = 0;
-    virtual AbstractIterator<Vertex>* end() = 0;
+    virtual AbstractIterator<Vertex>* begin(TypeIterator) = 0;
+    virtual AbstractIterator<Vertex>* end(TypeIterator) = 0;
 };
+
 
 #endif // IGRAPH
 

@@ -110,11 +110,11 @@ bool EdgeIterator<T>::is_last_adj()
     return false;
 }
 
-//template<class T>
-//Edge<T> EdgeIterator<T>::get_ptr() override
-//{
-//    return *ptr;
-//}
+template<class T>
+AbstractComponent<T>* EdgeIterator<T>::get_ptr() const
+{
+    return ptr;
+}
 
 
 template class EdgeIterator<int>;

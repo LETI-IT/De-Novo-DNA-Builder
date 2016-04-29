@@ -75,14 +75,37 @@ void Digraph<Vertex>::fill_achievable(vector<Vertex> &v, queue<Vertex> &q)
 }
 
 template<class Vertex>
-EdgeIterator<Vertex>* Digraph<Vertex>::begin()
+AbstractIterator<Vertex>* Digraph<Vertex>::begin(TypeIterator type)
 {
+//    switch(type)
+//    {
+//    case VERTEX:
+//        cout << "VERTEX ITERATOR" << endl;
+//        return new EdgeIterator<Vertex>(&digraph, false);
+
+//    case EDGE:
+//        cout << "EDGE ITERATOR" << endl;
+//        return new EdgeIterator<Vertex>(&digraph, false);
+//    };
+
     return new EdgeIterator<Vertex>(&digraph, false);
+
 }
 
 template<class Vertex>
-EdgeIterator<Vertex>* Digraph<Vertex>::end()
+AbstractIterator<Vertex>* Digraph<Vertex>::end(TypeIterator type)
 {
+//    switch(type)
+//    {
+//    case VERTEX:
+//        cout << "VERTEX ITERATOR" << endl;
+//        return new EdgeIterator<Vertex>(&digraph, true);
+
+//    case EDGE:
+//        cout << "EDGE ITERATOR" << endl;
+//        return new EdgeIterator<Vertex>(&digraph, true);
+//    };
+
     return new EdgeIterator<Vertex>(&digraph, true);
 }
 

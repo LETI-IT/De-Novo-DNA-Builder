@@ -31,8 +31,8 @@ public:
     vector<Vertex> adjacency(Vertex v);
     bool is_reach(Vertex start, Vertex finish);
 
-    EdgeIterator<Vertex>* begin();
-    EdgeIterator<Vertex>* end();
+    AbstractIterator<Vertex>* begin(TypeIterator);
+    AbstractIterator<Vertex>* end(TypeIterator);
 };
 
 #endif // DIGRAPH

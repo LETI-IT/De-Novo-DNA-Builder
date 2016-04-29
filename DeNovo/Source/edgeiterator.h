@@ -15,7 +15,6 @@ private:
 
     bool is_last_adj();
 
-
 public:
     EdgeIterator();
     EdgeIterator(map<T, vector<T> > *digraph_ptr, bool reverse);
@@ -28,10 +27,7 @@ public:
     bool operator==(const AbstractIterator<T> *it_other) const;
     bool operator!=(const AbstractIterator<T> *it_other) const;
 
-    virtual AbstractComponent<T>* get_ptr() const override
-    {
-        return ptr;
-    }
+    AbstractComponent<T>* get_ptr() const;
 };
 
 #endif // EDGEITERATOR_H

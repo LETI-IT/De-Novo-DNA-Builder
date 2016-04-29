@@ -14,7 +14,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     digraph.cpp \
-    edgeiterator.cpp
+    edgeiterator.cpp \
+    edge.cpp
 
 HEADERS  += mainwindow.h \
     digraph.h \
@@ -23,6 +24,7 @@ HEADERS  += mainwindow.h \
     euleriancircuit.h \
     edgeiterator.h \
     abstractcomponent.h \
-    edge.h
+    edge.h \
+    typeiterator.h
 
 FORMS    += mainwindow.ui

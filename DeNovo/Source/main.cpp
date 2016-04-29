@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
 
     cout << "foreach" << endl;
-    for(AbstractIterator<int> *it = p_digraph->begin(); **it != **p_digraph->end(); ++*it)
+    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
     {
         cout << **it << endl;
     }

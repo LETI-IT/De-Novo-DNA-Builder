@@ -22,17 +22,6 @@ public:
     virtual bool operator!=(const AbstractIterator<T> *it_other) const = 0;
 
     virtual AbstractComponent<T>* get_ptr() const = 0;
-
-//    friend bool operator ==(const AbstractIterator &left, const AbstractIterator &right)
-//    {
-//        return false;
-//    }
-
-//    friend bool operator !=(const AbstractIterator &left, const AbstractIterator &right)
-//    {
-//        return false;
-//    }
-
 };
 
 #endif // ITERATOR
