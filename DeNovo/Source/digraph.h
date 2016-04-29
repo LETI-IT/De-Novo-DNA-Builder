@@ -5,8 +5,10 @@
 #include <queue>
 #include <iostream>
 #include <sstream>
+#include <memory>
 
 #include "igraph.h"
+#include "edgeiterator.h"
 
 using namespace std;
 
@@ -29,7 +31,8 @@ public:
     vector<Vertex> adjacency(Vertex v);
     bool is_reach(Vertex start, Vertex finish);
 
-    const AbstractIterator<Vertex>& iterator();
+    EdgeIterator<Vertex>* begin();
+    EdgeIterator<Vertex>* end();
 };
 
 #endif // DIGRAPH

@@ -1,13 +1,12 @@
 #include "digraph.h"
-#include "digraphiterator.h"
 
-template<typename Vertex>
+template<class Vertex>
 Digraph<Vertex>::Digraph() {}
 
-template<typename Vertex>
+template<class Vertex>
 Digraph<Vertex>::~Digraph() {}
 
-template<typename Vertex>
+template<class Vertex>
 void Digraph<Vertex>::add_link(Vertex v1, Vertex v2)
 {
     digraph[v1].push_back(v2);
@@ -16,7 +15,7 @@ void Digraph<Vertex>::add_link(Vertex v1, Vertex v2)
     cout << "add vertices: " << v1 << ", " << v2 << endl;
 }
 
-template<typename Vertex>
+template<class Vertex>
 void Digraph<Vertex>::add_links(istream &stm)
 {
     Vertex v1, v2;
@@ -24,7 +23,7 @@ void Digraph<Vertex>::add_links(istream &stm)
         add_link(v1, v2);
 }
 
-template<typename Vertex>
+template<class Vertex>
 bool Digraph<Vertex>::is_linked(Vertex v1, Vertex v2)
 {
     vector<Vertex> neighbors = adjacency(v1);
@@ -35,13 +34,13 @@ bool Digraph<Vertex>::is_linked(Vertex v1, Vertex v2)
     return false;
 }
 
-template<typename Vertex>
+template<class Vertex>
 vector<Vertex> Digraph<Vertex>::adjacency(Vertex v)
 {
     return digraph[v];
 }
 
-template<typename Vertex>
+template<class Vertex>
 bool Digraph<Vertex>::is_reach(Vertex start, Vertex finish)
 {
     if (start == finish) return true;
@@ -65,14 +64,8 @@ bool Digraph<Vertex>::is_reach(Vertex start, Vertex finish)
     return false;
 }
 
-template<typename Vertex>
-const AbstractIterator<Vertex>& Digraph<Vertex>::iterator()
-{
-    AbstractIterator<Vertex> * it = new DigraphIterator<Vertex>();
-    return *it;
-}
 
-template<typename Vertex>
+template<class Vertex>
 void Digraph<Vertex>::fill_achievable(vector<Vertex> &v, queue<Vertex> &q)
 {
     for (typename vector<Vertex>::iterator it = v.begin(); it != v.end(); ++it)
@@ -80,6 +73,19 @@ void Digraph<Vertex>::fill_achievable(vector<Vertex> &v, queue<Vertex> &q)
         q.push(*it);
     }
 }
+
+template<class Vertex>
+EdgeIterator<Vertex>* Digraph<Vertex>::begin()
+{
+    return new EdgeIterator<Vertex>(&digraph, false);
+}
+
+template<class Vertex>
+EdgeIterator<Vertex>* Digraph<Vertex>::end()
+{
+    return new EdgeIterator<Vertex>(&digraph, true);
+}
+
 
 template class Digraph<int>;
 

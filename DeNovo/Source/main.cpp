@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "digraph.h"
+#include "digraphiterator.h"
 #include <QApplication>
 
 
@@ -39,6 +40,13 @@ int main(int argc, char *argv[])
     //for test: reached vertex.
 //    bool check3 = p_digraph->is_reach(1, 10);
 //    cout << "reached: " << check3 << endl;
+
+
+    cout << "foreach" << endl;
+    for(AbstractIterator<int> *it = p_digraph->begin(); **it != **p_digraph->end(); ++*it)
+    {
+        cout << **it << endl;
+    }
 
     return a.exec();
 }

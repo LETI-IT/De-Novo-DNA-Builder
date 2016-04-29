@@ -1,11 +1,38 @@
 #ifndef ITERATOR
 #define ITERATOR
 
-template<typename T>
-class AbstractIterator {
+#include <map>
+#include <vector>
+#include "abstractcomponent.h"
+using namespace std;
+
+template<class T>
+class AbstractIterator
+{
 public:
-    virtual T next() = 0;
-    virtual bool hasNext() = 0;
+    AbstractIterator(){}
+    virtual ~AbstractIterator(){}
+
+    virtual AbstractComponent<T>& operator*() const = 0;
+    virtual AbstractIterator& operator++() = 0;
+    virtual AbstractIterator& operator--() = 0;
+    virtual AbstractIterator& operator++(int) = 0;
+    virtual AbstractIterator& operator--(int) = 0;
+    virtual bool operator==(const AbstractIterator<T> *it_other) const = 0;
+    virtual bool operator!=(const AbstractIterator<T> *it_other) const = 0;
+
+    virtual AbstractComponent<T>* get_ptr() const = 0;
+
+//    friend bool operator ==(const AbstractIterator &left, const AbstractIterator &right)
+//    {
+//        return false;
+//    }
+
+//    friend bool operator !=(const AbstractIterator &left, const AbstractIterator &right)
+//    {
+//        return false;
+//    }
+
 };
 
 #endif // ITERATOR

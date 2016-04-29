@@ -6,6 +6,5 @@
 TARGET = DeNovo
 TEMPLATE = subdirs
 
-SUBDIRS = TestSuite \
-    Source
+SUBDIRS = Source
 CONFIG += ordered
