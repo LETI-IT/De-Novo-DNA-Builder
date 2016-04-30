@@ -1,39 +1,113 @@
-//
-// Created by Alexander on 10.04.2016.
-//
-
 #include "digraph.h"
 
-//digraph::digraph() { }
+template<class T>
+Digraph<T>::Digraph() {}
 
-//digraph::~digraph() { }
+template<class T>
+Digraph<T>::~Digraph() {}
 
-//void digraph::add_link(vertex_type v1, vertex_type v2)
-//{
-//    _digraph[v1].push_back(v2);
-//    _digraph[v2];
+template<class T>
+void Digraph<T>::add_link(T v1, T v2)
+{
+    digraph[v1].push_back(v2);
+    digraph[v2];
 
-//    cout << "add vertices: " << v1 << ", " << v2 << endl;
-//}
+    cout << "add vertices: " << v1 << ", " << v2 << endl;
+}
 
-//void digraph::add_links(istream &stm)
-//{
-//    vertex_type v1, v2;
-//    while (stm >> v1 >> v2)
-//        add_link(v1, v2);
-//}
+template<class T>
+void Digraph<T>::add_links(istream &stm)
+{
+    T v1, v2;
+    while (stm >> v1 >> v2)
+        add_link(v1, v2);
+}
 
-//bool digraph::is_linked(vertex_type v1, vertex_type v2) {
-//    return false;
-//}
+template<class T>
+bool Digraph<T>::is_linked(T v1, T v2)
+{
+    vector<T> neighbors = adjacency(v1);
+    for (typename vector<T>::iterator it = neighbors.begin(); it != neighbors.end(); ++it)
+    {
+        if (v2 == *it) return true;
+    }
+    return false;
+}
 
-//vector<vertex_type> digraph::adjacency(vertex_type v) {
-//    return std::vector<vertex_type>();
-//}
+template<class T>
+vector<T> Digraph<T>::adjacency(T v)
+{
+    return digraph[v];
+}
 
-//bool digraph::is_reach(vertex_type start, vertex_type finish) {
-//    return false;
-//}
+template<class T>
+bool Digraph<T>::is_reach(T start, T finish)
+{
+    if (start == finish) return true;
+
+    vector<T> neighbors = adjacency(start);
+    queue<T> achievable;
+
+    fill_achievable(neighbors, achievable);
+
+    while (!achievable.empty())
+    {
+        T v = achievable.front();
+        achievable.pop();
+        if (finish == v) return true;
+        else
+        {
+            vector<T> neighbors = adjacency(v);
+            fill_achievable(neighbors, achievable);
+        }
+    }
+    return false;
+}
+
+
+template<class T>
+void Digraph<T>::fill_achievable(vector<T> &v, queue<T> &q)
+{
+    for (typename vector<T>::iterator it = v.begin(); it != v.end(); ++it)
+    {
+        q.push(*it);
+    }
+}
+
+template<class T>
+AbstractIterator<T>* Digraph<T>::begin(TypeIterator type)
+{
+    switch(type)
+    {
+    case VERTEX:
+        //cout << "VERTEX ITERATOR" << endl;
+        return new VertexIterator<T>(&digraph, false);
+
+    case EDGE:
+        //cout << "EDGE ITERATOR" << endl;
+        return new EdgeIterator<T>(&digraph, false);
+    };
+
+}
+
+template<class T>
+AbstractIterator<T>* Digraph<T>::end(TypeIterator type)
+{
+    switch(type)
+    {
+    case VERTEX:
+        //cout << "VERTEX ITERATOR" << endl;
+        return new VertexIterator<T>(&digraph, true);
+
+    case EDGE:
+        //cout << "EDGE ITERATOR" << endl;
+        return new EdgeIterator<T>(&digraph, true);
+    };
+}
+
+
+template class Digraph<int>;
+
 
 
 
