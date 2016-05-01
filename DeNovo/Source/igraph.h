@@ -6,6 +6,7 @@
 #include <map>
 #include "abstractiterator.h"
 #include "typeiterator.h"
+
 using namespace std;
 
 /**

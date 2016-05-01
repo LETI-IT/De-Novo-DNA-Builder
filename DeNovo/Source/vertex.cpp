@@ -20,4 +20,9 @@ bool Vertex<T>::do_equals(const AbstractComponent<T>& _other) const
     return (v1 == other.v1);
 }
 
+template<class T>
+T Vertex<T>::getValue() {
+    return v1;
+}
+
 template class Vertex<int>;
