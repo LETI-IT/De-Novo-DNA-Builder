@@ -72,10 +72,10 @@ AbstractDigraph<T> *Digraph<T>::get_transpose()
     for(AbstractIterator<T> *v = begin(VERTEX); **v != **end(VERTEX); ++*v)
     {
         Vertex<T>& verticle = static_cast<Vertex<T>&>(**v);
-        vector<T> adjVerticles = adjacency(verticle.get_value());
+        vector<T> adjVerticles = adjacency(verticle.getValue());
         typename vector<T>::iterator it;
         for (it = adjVerticles.begin(); it != adjVerticles.end(); ++it) {
-            tr_graph->add_link(*it, verticle.get_value());
+            tr_graph->add_link(*it, verticle.getValue());
         }
     }
 

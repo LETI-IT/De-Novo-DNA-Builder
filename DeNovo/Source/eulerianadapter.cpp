@@ -25,7 +25,7 @@ bool EulerianAdapter<T>::isEulerianCycle()
     for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
     {
         Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
-        if(graph->in_degree(vertex.get_value()) != graph->out_degree(vertex.get_value()))
+        if(graph->in_degree(vertex.getValue()) != graph->out_degree(vertex.getValue()))
             return false;
     }
     return true;
@@ -60,7 +60,7 @@ bool EulerianAdapter<T>::isSC()
     for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
     {
        Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
-       visited[vertex.get_value()] = false;
+       visited[vertex.getValue()] = false;
     }
 
     // Find the first vertex with non-zero degree
@@ -69,18 +69,18 @@ bool EulerianAdapter<T>::isSC()
     for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
     {
         nonZeroVert = static_cast<Vertex<T>&>(**it);
-        if(graph->out_degree(nonZeroVert.get_value()) > 0)
+        if(graph->out_degree(nonZeroVert.getValue()) > 0)
             break;
     }
 
-    dfsUtil(this->graph, nonZeroVert.get_value(), visited);
-    this->eulerianCircuit.push_back(nonZeroVert.get_value());
+    dfsUtil(this->graph, nonZeroVert.getValue(), visited);
+    this->eulerianCircuit.push_back(nonZeroVert.getValue());
     checked = true;
 
     for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
     {
         Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
-        if(graph->out_degree(vertex.get_value()) > 0 && visited[vertex.get_value()] == false)
+        if(graph->out_degree(vertex.getValue()) > 0 && visited[vertex.getValue()] == false)
             return false;
     }
 
@@ -90,17 +90,17 @@ bool EulerianAdapter<T>::isSC()
     for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
     {
        Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
-       visited[vertex.get_value()] = false;
+       visited[vertex.getValue()] = false;
     }
 
-    dfsUtil(gr, nonZeroVert.get_value(), visited);
+    dfsUtil(gr, nonZeroVert.getValue(), visited);
     //Delete transposed graph
     delete gr;
 
     for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
     {
         Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
-        if(graph->out_degree(vertex.get_value()) > 0 && visited[vertex.get_value()] == false)
+        if(graph->out_degree(vertex.getValue()) > 0 && visited[vertex.getValue()] == false)
             return false;
     }
 
