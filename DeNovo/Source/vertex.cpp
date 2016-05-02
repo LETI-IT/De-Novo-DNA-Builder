@@ -21,10 +21,17 @@ bool Vertex<T>::do_equals(const AbstractComponent<T>& _other) const
 }
 
 template<class T>
+<<<<<<< HEAD
 T Vertex<T>::get_value()
 {
     return this->v1;
 }
 
 
+=======
+T Vertex<T>::getValue() {
+    return v1;
+}
+
+>>>>>>> 150a35390b55758ecd5213fb85c276f61ee4b15a
 template class Vertex<int>;

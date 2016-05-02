@@ -6,34 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>769</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="GraphView" name="graph" native="true">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>113</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>30</y>
-      <width>113</width>
-      <height>31</height>
+      <x>10</x>
+      <y>70</y>
+      <width>751</width>
+      <height>431</height>
      </rect>
     </property>
    </widget>
@@ -43,7 +30,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>769</width>
      <height>22</height>
     </rect>
    </property>
@@ -51,6 +38,11 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionLoad_graph"/>
+    <addaction name="actionSave_graph"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoad_position"/>
+    <addaction name="actionSave_position"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -81,8 +73,36 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionLoad_graph">
+   <property name="text">
+    <string>Load graph...</string>
+   </property>
+  </action>
+  <action name="actionSave_graph">
+   <property name="text">
+    <string>Save graph...</string>
+   </property>
+  </action>
+  <action name="actionLoad_position">
+   <property name="text">
+    <string>Load position...</string>
+   </property>
+  </action>
+  <action name="actionSave_position">
+   <property name="text">
+    <string>Save position...</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>GraphView</class>
+   <extends>QWidget</extends>
+   <header>graphview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

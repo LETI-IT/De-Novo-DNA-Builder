@@ -14,6 +14,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     digraph.cpp \
+    graphview.cpp \
+    vertex2d.cpp \
     edgeiterator.cpp \
     edge.cpp \
     vertexiterator.cpp \
@@ -25,6 +27,8 @@ HEADERS  += mainwindow.h \
     igraph.h \
     abstractiterator.h \
     euleriancircuit.h \
+    graphview.h \
+    vertex2d.h \
     edgeiterator.h \
     abstractcomponent.h \
     edge.h \
