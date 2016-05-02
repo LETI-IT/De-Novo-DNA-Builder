@@ -1,24 +1,22 @@
 #include "mainwindow.h"
 #include "digraph.h"
 #include "digraphiterator.h"
+#include "euleriancircuit.h"
 #include <QApplication>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+//    MainWindow w;
+//    w.show();
 
-    IGraph<int> *p_digraph = new Digraph<int>();
-    const string str = "1 2  1 7  1 8  "
-                "2 3  2 6  2 10  "
-                "3 4  3 5  3 11  "
-                "6 10  6 12  "
-                "8 9  8 12  "
-                "9 10  9 11  "
-                "11 7  "
-                "12 5";
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    const string str = "1 4 1 3 "
+                       "2 1 "
+                       "3 2 "
+                       "4 5 "
+                       "5 1 ";
     std::istringstream stm(str);
     p_digraph->add_links(stm);
 
@@ -56,6 +54,15 @@ int main(int argc, char *argv[])
     {
         cout << **it << endl;
     }
+
+    //test eulerian graph
+    vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
+    cout << "Eulerian cycle: ";
+    for (typename vector<int>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
+
 
     return a.exec();
 }

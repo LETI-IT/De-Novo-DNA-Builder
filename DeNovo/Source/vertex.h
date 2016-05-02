@@ -15,6 +15,7 @@ private:
 public:
     Vertex();
     Vertex(T v1);
+    T get_value();
 };
 
 #endif // VERTEX_H

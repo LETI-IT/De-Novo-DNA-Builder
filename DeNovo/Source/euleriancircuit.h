@@ -1,14 +1,23 @@
 #ifndef EULERIANCIRCUIT
 #define EULERIANCIRCUIT
 
-#include "igraph.h"
+#include "eulerianadapter.cpp"
 
 class EulerianCercuit {
-    template<class Vertex>
-    static AbstractIterator<Vertex> getEulerianCircuitVerticies(IGraph<Vertex> graph);
+public:
+    template<class T>
+    static vector<T> getEulerianCircuitVerticies(AbstractDigraph<T>* graph)
+    {
+        EulerianAdapter<T> euAdapter(graph);
+        return euAdapter.getEulerCircuit();
+    }
 
-    template<class Vertex>
-    static bool isEulerian(IGraph<Vertex> graph);
+    template<class T>
+    static bool isEulerian(AbstractDigraph<T>* graph)
+    {
+        EulerianAdapter<T> euAdapter(graph);
+        return euAdapter.isEulerianCycle();
+    }
 };
 
 #endif // EULERIANCIRCUIT

@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     edgeiterator.cpp \
     edge.cpp \
     vertexiterator.cpp \
-    vertex.cpp
+    vertex.cpp \
+    eulerianadapter.cpp
 
 HEADERS  += mainwindow.h \
     digraph.h \
@@ -29,6 +30,8 @@ HEADERS  += mainwindow.h \
     edge.h \
     typeiterator.h \
     vertexiterator.h \
-    vertex.h
+    vertex.h \
+    eulerianadapter.h \
+    abstractdigraph.h
 
 FORMS    += mainwindow.ui

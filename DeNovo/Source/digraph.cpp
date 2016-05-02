@@ -11,6 +11,19 @@ void Digraph<T>::add_link(T v1, T v2)
 {
     digraph[v1].push_back(v2);
     digraph[v2];
+    if(in_deg.find(v2) == in_deg.end()) {
+         in_deg[v2]=1;
+    }
+    else {
+        in_deg[v2]++;
+    }
+
+    if(out_deg.find(v1) == out_deg.end()) {
+        out_deg[v1]=1;
+    }
+    else {
+        out_deg[v1]++;
+    }
 
     cout << "add vertices: " << v1 << ", " << v2 << endl;
 }
@@ -39,6 +52,36 @@ vector<T> Digraph<T>::adjacency(T v)
 {
     return digraph[v];
 }
+
+template<class T>
+int Digraph<T>::in_degree(T v)
+{
+    return in_deg[v];
+}
+
+template<class T>
+int Digraph<T>::out_degree(T v)
+{
+    return out_deg[v];
+}
+
+template<class T>
+AbstractDigraph<T> *Digraph<T>::get_transpose()
+{
+    AbstractDigraph<T>* tr_graph = new Digraph<T>();
+    for(AbstractIterator<T> *v = begin(VERTEX); **v != **end(VERTEX); ++*v)
+    {
+        Vertex<T>& verticle = static_cast<Vertex<T>&>(**v);
+        vector<T> adjVerticles = adjacency(verticle.get_value());
+        typename vector<T>::iterator it;
+        for (it = adjVerticles.begin(); it != adjVerticles.end(); ++it) {
+            tr_graph->add_link(*it, verticle.get_value());
+        }
+    }
+
+    return tr_graph;
+}
+
 
 template<class T>
 bool Digraph<T>::is_reach(T start, T finish)
