@@ -123,11 +123,9 @@ AbstractIterator<T>* Digraph<T>::begin(TypeIterator type)
     switch(type)
     {
     case VERTEX:
-        //cout << "VERTEX ITERATOR" << endl;
         return new VertexIterator<T>(&digraph, false);
 
     case EDGE:
-        //cout << "EDGE ITERATOR" << endl;
         return new EdgeIterator<T>(&digraph, false);
     };
 
@@ -139,11 +137,9 @@ AbstractIterator<T>* Digraph<T>::end(TypeIterator type)
     switch(type)
     {
     case VERTEX:
-        //cout << "VERTEX ITERATOR" << endl;
         return new VertexIterator<T>(&digraph, true);
 
     case EDGE:
-        //cout << "EDGE ITERATOR" << endl;
         return new EdgeIterator<T>(&digraph, true);
     };
 }

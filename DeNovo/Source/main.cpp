@@ -2,14 +2,15 @@
 #include "digraph.h"
 #include "digraphiterator.h"
 #include "euleriancircuit.h"
+#include "manipulator.h"
 #include <QApplication>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
+    MainWindow w;
+    w.show();
 
     AbstractDigraph<int> *p_digraph = new Digraph<int>();
     const string str = "1 4 1 3 "
@@ -44,16 +45,16 @@ int main(int argc, char *argv[])
     cout << "foreach edge" << endl;
     for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
     {
-        cout << **it << endl;
+        cout << framing::frame << **it << endl;
     }
 
 
 //for test: iterable vertexes.
-    cout << "foreach vertex" << endl;
-    for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); **it != **p_digraph->end(VERTEX); ++*it)
-    {
-        cout << **it << endl;
-    }
+//    cout << "foreach vertex" << endl;
+//    for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); **it != **p_digraph->end(VERTEX); ++*it)
+//    {
+//        cout << **it << endl;
+//    }
 
     //test eulerian graph
     vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
@@ -62,6 +63,13 @@ int main(int argc, char *argv[])
         cout << *it << " ";
     }
     cout << endl;
+
+
+    //for test: manipulator.
+//    cout << framing::frame << "hello" << endl;
+//    cout << framing::frame << 6 << endl;
+//    Vertex<int> v(5);
+//    cout << framing::frame << v << endl;
 
 
     return a.exec();

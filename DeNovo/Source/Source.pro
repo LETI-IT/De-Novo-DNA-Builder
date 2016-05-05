@@ -36,6 +36,7 @@ HEADERS  += mainwindow.h \
     vertexiterator.h \
     vertex.h \
     eulerianadapter.h \
-    abstractdigraph.h
+    abstractdigraph.h \
+    manipulator.h
 
 FORMS    += mainwindow.ui

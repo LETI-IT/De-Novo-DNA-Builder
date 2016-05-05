@@ -9,7 +9,7 @@ Edge<T>::Edge(T v1, T v2) : v1(v1), v2(v2){}
 template<class T>
 ostream& Edge<T>::do_print(ostream& os) const
 {
-      os << "{" << v1 << ", " << v2 << "}";
+      os << v1 << ", " << v2;
       return os;
 }
 

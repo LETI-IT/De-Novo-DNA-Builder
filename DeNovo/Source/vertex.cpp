@@ -9,7 +9,7 @@ Vertex<T>::Vertex(T v1) : v1(v1){}
 template<class T>
 ostream& Vertex<T>::do_print(ostream& os) const
 {
-      os << "{" << v1 << "}";
+      os << v1;
       return os;
 }
 

@@ -7,4 +7,7 @@ TARGET = DeNovo
 TEMPLATE = subdirs
 
 SUBDIRS = Source
+CONFIG   += c++11
 CONFIG += ordered
+
+QMAKE_CXXFLAGS += -std=c++11
