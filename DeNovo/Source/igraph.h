@@ -13,7 +13,7 @@ using namespace std;
  * @brief The IGraph class is interface for graph structure
  */
 
-template<typename Vertex>
+template<class Vertex, class Allocator = allocator<Vertex> >
 class IGraph
 {
 public:

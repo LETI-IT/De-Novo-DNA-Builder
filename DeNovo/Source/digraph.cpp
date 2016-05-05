@@ -1,13 +1,13 @@
 #include "digraph.h"
 
-template<class T>
-Digraph<T>::Digraph() {}
+template<class T, class Allocator>
+Digraph<T, Allocator>::Digraph() {}
 
-template<class T>
-Digraph<T>::~Digraph() {}
+template<class T, class Allocator>
+Digraph<T, Allocator>::~Digraph() {}
 
-template<class T>
-void Digraph<T>::add_link(T v1, T v2)
+template<class T, class Allocator>
+void Digraph<T, Allocator>::add_link(T v1, T v2)
 {
     digraph[v1].push_back(v2);
     digraph[v2];
@@ -28,16 +28,16 @@ void Digraph<T>::add_link(T v1, T v2)
     cout << "add vertices: " << v1 << ", " << v2 << endl;
 }
 
-template<class T>
-void Digraph<T>::add_links(istream &stm)
+template<class T, class Allocator>
+void Digraph<T, Allocator>::add_links(istream &stm)
 {
     T v1, v2;
     while (stm >> v1 >> v2)
         add_link(v1, v2);
 }
 
-template<class T>
-bool Digraph<T>::is_linked(T v1, T v2)
+template<class T, class Allocator>
+bool Digraph<T, Allocator>::is_linked(T v1, T v2)
 {
     vector<T> neighbors = adjacency(v1);
     for (typename vector<T>::iterator it = neighbors.begin(); it != neighbors.end(); ++it)
@@ -47,28 +47,28 @@ bool Digraph<T>::is_linked(T v1, T v2)
     return false;
 }
 
-template<class T>
-vector<T> Digraph<T>::adjacency(T v)
+template<class T, class Allocator>
+vector<T> Digraph<T, Allocator>::adjacency(T v)
 {
     return digraph[v];
 }
 
-template<class T>
-int Digraph<T>::in_degree(T v)
+template<class T, class Allocator>
+int Digraph<T, Allocator>::in_degree(T v)
 {
     return in_deg[v];
 }
 
-template<class T>
-int Digraph<T>::out_degree(T v)
+template<class T, class Allocator>
+int Digraph<T, Allocator>::out_degree(T v)
 {
     return out_deg[v];
 }
 
-template<class T>
-AbstractDigraph<T> *Digraph<T>::get_transpose()
+template<class T, class Allocator>
+AbstractDigraph<T, Allocator> *Digraph<T, Allocator>::get_transpose()
 {
-    AbstractDigraph<T>* tr_graph = new Digraph<T>();
+    AbstractDigraph<T, Allocator>* tr_graph = new Digraph<T, Allocator>();
     for(AbstractIterator<T> *v = begin(VERTEX); **v != **end(VERTEX); ++*v)
     {
         Vertex<T>& verticle = static_cast<Vertex<T>&>(**v);
@@ -83,8 +83,8 @@ AbstractDigraph<T> *Digraph<T>::get_transpose()
 }
 
 
-template<class T>
-bool Digraph<T>::is_reach(T start, T finish)
+template<class T, class Allocator>
+bool Digraph<T, Allocator>::is_reach(T start, T finish)
 {
     if (start == finish) return true;
 
@@ -108,8 +108,8 @@ bool Digraph<T>::is_reach(T start, T finish)
 }
 
 
-template<class T>
-void Digraph<T>::fill_achievable(vector<T> &v, queue<T> &q)
+template<class T, class Allocator>
+void Digraph<T, Allocator>::fill_achievable(vector<T> &v, queue<T> &q)
 {
     for (typename vector<T>::iterator it = v.begin(); it != v.end(); ++it)
     {
@@ -117,8 +117,8 @@ void Digraph<T>::fill_achievable(vector<T> &v, queue<T> &q)
     }
 }
 
-template<class T>
-AbstractIterator<T>* Digraph<T>::begin(TypeIterator type)
+template<class T, class Allocator>
+AbstractIterator<T>* Digraph<T, Allocator>::begin(TypeIterator type)
 {
     switch(type)
     {
@@ -131,8 +131,8 @@ AbstractIterator<T>* Digraph<T>::begin(TypeIterator type)
 
 }
 
-template<class T>
-AbstractIterator<T>* Digraph<T>::end(TypeIterator type)
+template<class T, class Allocator>
+AbstractIterator<T>* Digraph<T, Allocator>::end(TypeIterator type)
 {
     switch(type)
     {

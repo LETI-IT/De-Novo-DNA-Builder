@@ -3,13 +3,14 @@
 
 #include "abstractiterator.h"
 #include "edge.h"
+#include "graphallocator.h"
 
 template<class T>
 class EdgeIterator : public AbstractIterator<T>
 {
 private:
-    typename map<T, vector<T> >::iterator it_vtx; //vertex iterator.
-    typename map<T, vector<T> >::iterator it_vtx_end; //vertex iterator pointer to end.
+    typename map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > >::iterator it_vtx; //vertex iterator.
+    typename map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > >::iterator it_vtx_end; //vertex iterator pointer to end.
     typename vector<T>::iterator it_adj; //adjacency iterator.
     Edge<T> * ptr; //pointer to edge value.
 
@@ -17,7 +18,7 @@ private:
 
 public:
     EdgeIterator();
-    EdgeIterator(map<T, vector<T> > *digraph_ptr, bool reverse);
+    EdgeIterator(map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > > *digraph_ptr, bool reverse);
 
     Edge<T>& operator*() const;
     EdgeIterator& operator++();

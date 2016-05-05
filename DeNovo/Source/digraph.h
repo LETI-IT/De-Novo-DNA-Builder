@@ -10,14 +10,16 @@
 #include "abstractdigraph.h"
 #include "edgeiterator.h"
 #include "vertexiterator.h"
+#include "graphallocator.h"
 
 using namespace std;
 
-template<typename T>
-class Digraph : public AbstractDigraph<T>
+template<class T, class Allocator = allocator<T> >
+class Digraph : public AbstractDigraph<T, Allocator>
 {
 private:
-    map<T, vector<T> > digraph;
+    map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > > digraph;
+//    map<T, vector<T>, less<T>, GraphAllocator > digraph;
     map<T, int> in_deg;
     map<T, int> out_deg;
 
@@ -36,7 +38,7 @@ public:
 
     int in_degree(T v);
     int out_degree(T v);
-    AbstractDigraph<T>* get_transpose();
+    AbstractDigraph<T, Allocator>* get_transpose();
 
     AbstractIterator<T>* begin(TypeIterator);
     AbstractIterator<T>* end(TypeIterator);

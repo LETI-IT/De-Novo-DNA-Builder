@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Source
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -std=c++11
+
 SOURCES += main.cpp\
         mainwindow.cpp \
     digraph.cpp \
@@ -37,6 +39,7 @@ HEADERS  += mainwindow.h \
     vertex.h \
     eulerianadapter.h \
     abstractdigraph.h \
-    manipulator.h
+    manipulator.h \
+    graphallocator.h
 
 FORMS    += mainwindow.ui

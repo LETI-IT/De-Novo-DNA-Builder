@@ -95,12 +95,15 @@ void MainWindow::savePosition() {
         if (inputFile.open(QIODevice::ReadOnly))
         {
            std::ostringstream stm;
-           auto path =  filePath.toStdString().c_str();
+//           auto path =  filePath.toStdString().c_str();
+           const char* path =  filePath.toStdString().c_str();
            std::ofstream datFile(path, std::ofstream::out);
-           auto position = ui->graph->getPos();
+//           auto position = ui->graph->getPos();
+           map<int, Vertex2D> position = ui->graph->getPos();
            for (std::map<int, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
            {
-             auto el = *it;
+//             auto el = *it;
+               pair<int, Vertex2D> el = *it;
              stm << el.first << " " << el.second.x << " " << el.second.y << " ";
            }
            string str = stm.str();

@@ -7,7 +7,7 @@ EdgeIterator<T>::EdgeIterator()
 }
 
 template<class T>
-EdgeIterator<T>::EdgeIterator(map<T, vector<T> > *digraph_ptr, bool reverse)
+EdgeIterator<T>::EdgeIterator(map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > > *digraph_ptr, bool reverse)
 {
     if (!reverse)
     {

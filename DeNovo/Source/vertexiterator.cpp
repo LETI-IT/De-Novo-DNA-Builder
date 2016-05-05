@@ -10,7 +10,7 @@ VertexIterator<T>::VertexIterator()
 }
 
 template<class T>
-VertexIterator<T>::VertexIterator(map<T, vector<T> > *digraph_ptr, bool reverse)
+VertexIterator<T>::VertexIterator(map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > > *digraph_ptr, bool reverse)
 {
     if (!reverse)
     {
