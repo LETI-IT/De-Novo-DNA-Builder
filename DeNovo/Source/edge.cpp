@@ -21,3 +21,4 @@ bool Edge<T>::do_equals(const AbstractComponent<T>& _other) const
 }
 
 template class Edge<int>;
+template class Edge<string>;

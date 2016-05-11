@@ -22,7 +22,8 @@ VertexIterator<T>::VertexIterator(map<T, vector<T>, less<T>, GraphAllocator<pair
         if (!is_init)
         {
             T temp = digraph_ptr->end()->first;
-            temp++;
+//            temp++;
+            temp += temp;
             digraph_ptr->operator [](temp).push_back(0);
             is_init = true;
         }
@@ -93,3 +94,4 @@ AbstractComponent<T>* VertexIterator<T>::get_ptr() const
 
 
 template class VertexIterator<int>;
+template class VertexIterator<string>;

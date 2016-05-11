@@ -146,6 +146,7 @@ AbstractIterator<T>* Digraph<T, Allocator>::end(TypeIterator type)
 
 
 template class Digraph<int>;
+template class Digraph<string>;
 
 
 

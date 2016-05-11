@@ -71,6 +71,8 @@ int main(int argc, char *argv[])
 //    Vertex<int> v(5);
 //    cout << framing::frame << v << endl;
 
+    AbstractDigraph<string> *p_digraph2 = new Digraph<string>();
+
 
     return a.exec();
 }

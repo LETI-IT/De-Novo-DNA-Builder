@@ -27,3 +27,4 @@ T Vertex<T>::getValue()
 }
 
 template class Vertex<int>;
+template class Vertex<string>;

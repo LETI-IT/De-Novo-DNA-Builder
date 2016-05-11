@@ -118,3 +118,4 @@ AbstractComponent<T>* EdgeIterator<T>::get_ptr() const
 
 
 template class EdgeIterator<int>;
+template class EdgeIterator<string>;
