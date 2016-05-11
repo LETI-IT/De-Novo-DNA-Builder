@@ -43,3 +43,6 @@ HEADERS  += mainwindow.h \
     graphallocator.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    Source.pri

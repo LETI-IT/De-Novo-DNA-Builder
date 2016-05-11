@@ -22,6 +22,9 @@ private Q_SLOTS:
     void test_check_add_link();
     void test_adjacency();
     void test_reacheble();
+    void test_in_degree();
+    void test_out_degree();
+    void test_transpose();
 };
 
 TestSuiteTest::TestSuiteTest()
@@ -29,7 +32,7 @@ TestSuiteTest::TestSuiteTest()
     /**
       change it when real will be done
       **/
-    test_mode=0;
+    test_mode=1;
 }
 
 void TestSuiteTest::testCase1()
@@ -39,21 +42,21 @@ void TestSuiteTest::testCase1()
 
 void TestSuiteTest::test_check_add_link()
 {
-    IGraph<vertex_type>* testGraph = GraphFactory::newInstance(test_mode);
+    AbstractDigraph<test_vertex_type>* testGraph = TestGraphFactory::newInstance<test_vertex_type>(test_mode);
     testGraph->add_link(0,1);
     QCOMPARE(testGraph->is_linked(0,1),true);
 }
 
 void TestSuiteTest::test_adjacency()
 {
-    IGraph<vertex_type>* testGraph = GraphFactory::newInstance(test_mode);
+    AbstractDigraph<test_vertex_type>* testGraph = TestGraphFactory::newInstance<test_vertex_type>(test_mode);
     testGraph->add_link(0,1);
     testGraph->add_link(1,2);
     testGraph->add_link(1,3);
 
-    vector<vertex_type> actual = testGraph->adjacency(test_mode);
-    vector<vertex_type> expect;
-    expect.push_back(0);
+    vector<test_vertex_type> actual = testGraph->adjacency(1);
+    std::cout<<std::endl;
+    vector<test_vertex_type> expect;
     expect.push_back(2);
     expect.push_back(3);
     QCOMPARE(actual,expect);
@@ -61,10 +64,39 @@ void TestSuiteTest::test_adjacency()
 
 void TestSuiteTest::test_reacheble()
 {
-    IGraph<vertex_type>* testGraph = GraphFactory::newInstance(test_mode);
+    AbstractDigraph<test_vertex_type>* testGraph = TestGraphFactory::newInstance<test_vertex_type>(test_mode);
     testGraph->add_link(1,2);
     testGraph->add_link(2,3);
     QCOMPARE(testGraph->is_reach(1,3),true);
+}
+
+void TestSuiteTest::test_in_degree()
+{
+     AbstractDigraph<test_vertex_type>* testGraph = TestGraphFactory::newInstance<test_vertex_type>(test_mode);
+     testGraph->add_link(0,1);
+     testGraph->add_link(1,2);
+     testGraph->add_link(1,3);
+     testGraph->add_link(1,4);
+     testGraph->add_link(1,5);
+     testGraph->add_link(5,1);
+     QCOMPARE(testGraph->in_degree(1),2);
+}
+
+void TestSuiteTest::test_out_degree()
+{
+     AbstractDigraph<test_vertex_type>* testGraph = TestGraphFactory::newInstance<test_vertex_type>(test_mode);
+     testGraph->add_link(0,1);
+     testGraph->add_link(1,2);
+     testGraph->add_link(1,3);
+     testGraph->add_link(1,4);
+     testGraph->add_link(1,5);
+     testGraph->add_link(5,1);
+     QCOMPARE(testGraph->out_degree(1),4);
+}
+
+void TestSuiteTest::test_transpose()
+{
+
 }
 
 

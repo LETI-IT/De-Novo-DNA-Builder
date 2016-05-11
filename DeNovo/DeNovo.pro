@@ -6,7 +6,8 @@
 TARGET = DeNovo
 TEMPLATE = subdirs
 
-SUBDIRS = Source
+SUBDIRS += TestSuite \
+            Source
 CONFIG   += c++11
 CONFIG += ordered
 

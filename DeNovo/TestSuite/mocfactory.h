@@ -1,57 +1,84 @@
-//#ifndef MOCFACTORY
-//#define MOCFACTORY
-//#include "../Source/igraph.h"
-//#include "mockiterator.hpp"
+#ifndef MOCFACTORY
+#define MOCFACTORY
+#include "digraph.h"
 
-//#define vertex_type int
+#define test_vertex_type int
 
-//class MocGraph : public IGraph<vertex_type>
-//{
-//public:
-//    void add_link(vertex_type v1, vertex_type v2){
-//    }
+template<class T, class Allocator = allocator<T> >
+class MocGraph : public AbstractDigraph<T, Allocator>
+{
+private:
+    int degree_in;
+    int degree_out;
 
-//    void add_links(istream& stm) {
-//    }
+public:
+    MocGraph() {
+        degree_in = 2;
+        degree_out = 4;
+    }
+    ~MocGraph() {}
 
-//    bool is_linked(vertex_type v1, vertex_type v2) {
-//        return true;
-//    }
+    void add_link(T v1, T v2){
+    }
 
-//    vector<vertex_type> adjacency(vertex_type v) {
-//        vector<vertex_type> vect;
-//        vect.push_back(0);
-//        vect.push_back(2);
-//        vect.push_back(3);
-//        return vect;
-//    }
+    void add_links(istream& stm) {
+    }
 
-//    bool is_reach(vertex_type start, vertex_type finish) {
-//        return true;
-//    }
+    bool is_linked(T v1, T v2) {
+        return true;
+    }
 
-//    const AbstractIterator<int>& iterator()
-//    {
-//        return new MockIterator<int>();
-//    }
-//};
+    vector<T> adjacency(T v) {
+        vector<T> vect;
+        vect.push_back(0);
+        vect.push_back(2);
+        vect.push_back(3);
+        return vect;
+    }
+
+    bool is_reach(T start, T finish) {
+        return true;
+    }
 
 
-//class GraphFactory
-//{
-//private:
-//    GraphFactory(){};
+    AbstractIterator<T>* begin(TypeIterator) {
+        return NULL;
+    }
 
-//public:
-//    ~GraphFactory(){};
+    AbstractIterator<T>* end(TypeIterator) {
+        return NULL;
+    }
 
-//    static IGraph<vertex_type>* newInstance(int graphType=0)
-//    {
-//        if(graphType==0)
-//            return new MocGraph(); //the test graph
-//        else
-//            return NULL; // the real graph
-//    }
-//};
+    int in_degree(T v) {
+        return degree_in;
+    }
 
-//#endif // MOCFACTORY
+    int out_degree(T v) {
+        return degree_out;
+    }
+
+    AbstractDigraph<T, Allocator>* get_transpose(){
+        return NULL;
+    }
+};
+
+
+class TestGraphFactory
+{
+private:
+    TestGraphFactory(){};
+
+public:
+    ~TestGraphFactory(){};
+
+    template<class T, class Allocator = allocator<T> >
+    static AbstractDigraph<T, Allocator>* newInstance(int graphType=0)
+    {
+        if(graphType==0)
+            return new MocGraph<T, Allocator>(); //the test graph
+        else
+            return new Digraph<T, Allocator>(); // the real graph
+    }
+};
+
+#endif // MOCFACTORY
