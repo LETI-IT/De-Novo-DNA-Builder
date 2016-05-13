@@ -1,6 +1,7 @@
 #include <QString>
 #include <QtTest>
 #include "mocfactory.h"
+#include "debrojingraphgenerator.h"
 
 class TestSuiteTest : public QObject
 {
@@ -25,6 +26,8 @@ private Q_SLOTS:
     void test_in_degree();
     void test_out_degree();
     void test_transpose();
+
+    void graphShoultBeCreated();
 };
 
 TestSuiteTest::TestSuiteTest()
@@ -99,6 +102,13 @@ void TestSuiteTest::test_transpose()
 
 }
 
+void TestSuiteTest::graphShoultBeCreated()
+{
+    const string str = "1 4 1 3 ";
+    std::istringstream stm(str);
+    Digraph<string>* graph = DeBrojinGraphGenerator::generate(stm);
+    QCOMPARE((graph != NULL), true);
+}
 
 QTEST_APPLESS_MAIN(TestSuiteTest)
 

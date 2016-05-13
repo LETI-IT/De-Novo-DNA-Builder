@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    AbstractDigraph<string> *p_digraph = new Digraph<string>();
     const string str = "1 4 1 3 "
                        "2 1 "
                        "3 2 "
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
 //for test: iterable edges.
     cout << "foreach edge" << endl;
-    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
+    for(AbstractIterator<string> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
     {
         cout << framing::frame << **it << endl;
     }
@@ -57,12 +57,12 @@ int main(int argc, char *argv[])
 //    }
 
     //test eulerian graph
-    vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
-    cout << "Eulerian cycle: ";
-    for (typename vector<int>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
-        cout << *it << " ";
-    }
-    cout << endl;
+//    vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
+//    cout << "Eulerian cycle: ";
+//    for (typename vector<int>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
+//        cout << *it << " ";
+//    }
+//    cout << endl;
 
 
     //for test: manipulator.
