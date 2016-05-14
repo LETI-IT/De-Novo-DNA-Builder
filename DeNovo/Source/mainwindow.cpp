@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLoad_graph, SIGNAL(triggered(bool)), this, SLOT(loadGraph()));
     connect(ui->actionLoad_position, SIGNAL(triggered(bool)), this, SLOT(loadPosition()));
     connect(ui->actionSave_position, SIGNAL(triggered(bool)), this, SLOT(savePosition()));
+    connect(ui->actionImport_kmers, SIGNAL(triggered(bool)), this, SLOT(loadFromKmers()));
 }
 
 MainWindow::~MainWindow()
@@ -111,4 +112,28 @@ void MainWindow::savePosition() {
            datFile.close();
         }
     }
+}
+
+void MainWindow::loadFromKmers() {
+    QString filePath = QFileDialog::getOpenFileName(
+                       this, tr("Open File"), "",
+                       tr("Text (*.txt)"));
+
+    if (filePath.isEmpty())
+        return;
+
+    QFile inputFile(filePath);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       QTextStream in(&inputFile);
+       QString content = in.readAll();
+       inputFile.close();
+       string str = content.toStdString();
+       std::istringstream stm(str);
+       IGraph<string> *p_digraph = DeBrojinGraphGenerator::generate(stm);
+
+       //TODO: for string graph or generic
+//       ui->graph->setGraph(p_digraph);
+    }
+
 }

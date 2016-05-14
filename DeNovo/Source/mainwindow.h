@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "graphview.h"
+#include "debrojingraphgenerator.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,7 @@ public slots:
     void saveGraph();
     void loadPosition();
     void savePosition();
+    void loadFromKmers();
 private:
     Ui::MainWindow *ui;
 };

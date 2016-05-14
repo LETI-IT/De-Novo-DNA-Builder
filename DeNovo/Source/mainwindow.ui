@@ -31,7 +31,7 @@
      <x>0</x>
      <y>0</y>
      <width>769</width>
-     <height>22</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -43,6 +43,8 @@
     <addaction name="separator"/>
     <addaction name="actionLoad_position"/>
     <addaction name="actionSave_position"/>
+    <addaction name="separator"/>
+    <addaction name="actionImport_kmers"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -91,6 +93,11 @@
   <action name="actionSave_position">
    <property name="text">
     <string>Save position...</string>
+   </property>
+  </action>
+  <action name="actionImport_kmers">
+   <property name="text">
+    <string>import kmers...</string>
    </property>
   </action>
  </widget>
