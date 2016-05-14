@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "euleriancircuit.h"
 #include "manipulator.h"
+#include <QDebug>
 
 class TestSuiteTest : public QObject
 {
@@ -108,6 +109,19 @@ void TestSuiteTest::test_out_degree()
      testGraph->add_link(1,5);
      testGraph->add_link(5,1);
      QCOMPARE(testGraph->out_degree(1),4);
+
+     // TODO: Broken iterator
+     IGraph<string> *g = new Digraph<string>();
+     g->add_link("0","1");
+     g->add_link("1","2");
+     g->add_link("1","3");
+     g->add_link("1","4");
+     g->add_link("1","5");
+     g->add_link("5","1");
+     for(AbstractIterator<string> *it = g->begin(VERTEX); **it != **g->end(VERTEX); ++*it) {
+         Vertex<string>& el = dynamic_cast<Vertex<string>&>(const_cast<AbstractComponent<string>&>(**it));
+         qDebug() << QString::fromStdString(el.getValue());
+     }
 }
 
 void TestSuiteTest::test_transpose()
