@@ -3,6 +3,8 @@
 #include "mocfactory.h"
 #include "debrojingraphgenerator.h"
 #include <algorithm>
+#include "euleriancircuit.h"
+#include "manipulator.h"
 
 class TestSuiteTest : public QObject
 {
@@ -31,10 +33,14 @@ private Q_SLOTS:
     void graphTestLinkage();
     void graphTestAdjacency();
     void graphTestReachability();
+    void graphTestForeach();
 
     void graphShoultBeCreated();
     void graphShouldCheckExistingElementsRight();
     void generatorTest();
+
+    void eulerianCircleTest();
+    void manipulatorTest();
 };
 
 TestSuiteTest::TestSuiteTest()
@@ -149,6 +155,26 @@ void TestSuiteTest::graphTestReachability()
     QCOMPARE(p_digraph->is_reach(1, 3), true);
 }
 
+void TestSuiteTest::graphTestForeach() {
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    std::istringstream stm("1 4 4 3 ");
+    p_digraph->add_links(stm);
+
+    //TODO: fix
+//    cout << "foreach edge" << endl;
+//    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
+//    {
+//        cout << framing::frame << **it << endl;
+//    }
+
+//    //for test: iterable vertexes.
+//    cout << "foreach vertex" << endl;
+//    for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); **it != **p_digraph->end(VERTEX); ++*it)
+//    {
+//        cout << **it << endl;
+//    }
+}
+
 void TestSuiteTest::graphShoultBeCreated()
 {
     const string str = "1 4 1 3 ";
@@ -194,6 +220,26 @@ void TestSuiteTest::generatorTest() {
     adj = graph->adjacency("AB");
     QCOMPARE((isExistsInVector(adj, "BA")), false);
     QCOMPARE((isExistsInVector(adj, "BB")), true);
+}
+
+void TestSuiteTest::eulerianCircleTest() {
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    std::istringstream stm("1 4 4 3 3 1");
+    p_digraph->add_links(stm);
+
+    vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
+    QCOMPARE(euCycle.at(0), 1);
+    QCOMPARE(euCycle.at(1), 4);
+    QCOMPARE(euCycle.at(2), 3);
+    QCOMPARE(euCycle.at(3), 1);
+}
+
+void TestSuiteTest::manipulatorTest() {
+    //TODO:
+//    Vertex<int> v(5);
+//    std::istringstream stm();
+//    stm << framing::frame << v << endl;
+//    QCOMPARE(stm.str(), "{5}");
 }
 
 
