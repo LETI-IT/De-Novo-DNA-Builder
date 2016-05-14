@@ -28,6 +28,10 @@ private Q_SLOTS:
     void test_out_degree();
     void test_transpose();
 
+    void graphTestLinkage();
+    void graphTestAdjacency();
+    void graphTestReachability();
+
     void graphShoultBeCreated();
     void graphShouldCheckExistingElementsRight();
     void generatorTest();
@@ -103,6 +107,46 @@ void TestSuiteTest::test_out_degree()
 void TestSuiteTest::test_transpose()
 {
 
+}
+
+void TestSuiteTest::graphTestLinkage() {
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    const string str = "1 4 1 3 "
+                       "2 1 "
+                       "3 2 "
+                       "4 5 "
+                       "5 1 ";
+    std::istringstream stm(str);
+    p_digraph->add_links(stm);
+
+
+    //for test: linked vertex.
+    QCOMPARE(p_digraph->is_linked(1, 3), true); // is linked.
+    QCOMPARE(p_digraph->is_linked(5, 2), false); // isn't linked.
+}
+
+void TestSuiteTest::graphTestAdjacency() {
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    std::istringstream stm("1 4 1 3 ");
+    p_digraph->add_links(stm);
+
+    //for test: adjacency vertex.
+    vector<int> neighs = p_digraph->adjacency(1);
+    vector<int>::iterator it = neighs.begin();
+
+    QCOMPARE((*it), 4);
+    it++;
+    QCOMPARE((*it), 3);
+}
+
+void TestSuiteTest::graphTestReachability()
+{
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    std::istringstream stm("1 4 4 3 ");
+    p_digraph->add_links(stm);
+
+    //for test: reached vertex.
+    QCOMPARE(p_digraph->is_reach(1, 3), true);
 }
 
 void TestSuiteTest::graphShoultBeCreated()
