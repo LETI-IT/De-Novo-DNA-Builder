@@ -1,6 +1,8 @@
 #include <QString>
 #include <QtTest>
 #include "mocfactory.h"
+#include "debrojingraphgenerator.h"
+#include <algorithm>
 
 class TestSuiteTest : public QObject
 {
@@ -25,6 +27,10 @@ private Q_SLOTS:
     void test_in_degree();
     void test_out_degree();
     void test_transpose();
+
+    void graphShoultBeCreated();
+    void graphShouldCheckExistingElementsRight();
+    void generatorTest();
 };
 
 TestSuiteTest::TestSuiteTest()
@@ -97,6 +103,53 @@ void TestSuiteTest::test_out_degree()
 void TestSuiteTest::test_transpose()
 {
 
+}
+
+void TestSuiteTest::graphShoultBeCreated()
+{
+    const string str = "1 4 1 3 ";
+    std::istringstream stm(str);
+    Digraph<string>* graph = DeBrojinGraphGenerator::generate(stm);
+    QCOMPARE((graph != NULL), true);
+}
+
+void TestSuiteTest::graphShouldCheckExistingElementsRight() {
+    Digraph<string>* graph = new Digraph<string>();
+    graph->add_link("AA", "BB");
+
+    QCOMPARE((graph->hasNode("AA")), true);
+    QCOMPARE((graph->hasNode("BB")), true);
+    QCOMPARE((graph->hasNode("CC")), false);
+}
+
+bool isExistsInVector(vector<string>& vec, string val) {
+    return find(vec.begin(), vec.end(), val) != vec.end();
+}
+
+void TestSuiteTest::generatorTest() {
+    const string str = "3"
+                       "BBA "
+                       "BAA "
+                       "AAA "
+                       "AAB "
+                       "ABB "
+                       "BBA ";
+    std::istringstream stm(str);
+    Digraph<string>* graph = DeBrojinGraphGenerator::generate(stm);
+
+    vector<string> adj = graph->adjacency("AA");
+    QCOMPARE((isExistsInVector(adj, "AB")), true);
+    QCOMPARE((isExistsInVector(adj, "AA")), true);
+
+    adj = graph->adjacency("BB");
+    QCOMPARE((isExistsInVector(adj, "BA")), true);
+
+    adj = graph->adjacency("BA");
+    QCOMPARE((isExistsInVector(adj, "AA")), true);
+
+    adj = graph->adjacency("AB");
+    QCOMPARE((isExistsInVector(adj, "BA")), false);
+    QCOMPARE((isExistsInVector(adj, "BB")), true);
 }
 
 

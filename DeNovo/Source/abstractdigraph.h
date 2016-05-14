@@ -11,6 +11,7 @@ public:
     virtual int in_degree(T v)=0;
     virtual int out_degree(T v)=0;
     virtual AbstractDigraph<T, Allocator>* get_transpose()=0;
+    virtual bool hasNode(T v) = 0;
 };
 
 #endif // ABSTRACTDIGRAPH_H
