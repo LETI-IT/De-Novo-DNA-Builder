@@ -6,7 +6,7 @@
 
 GraphView::GraphView(QWidget *parent) : QWidget(parent)
 {
-    selectedIndex = -1;
+    selectedIndex = "";
 }
 
 void GraphView::paintEvent(QPaintEvent *event)
@@ -14,10 +14,10 @@ void GraphView::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setPen(QPen(Qt::red, 2));
 
-    for (std::map<int, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
+    for (std::map<string, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
     {
         auto left = *it;
-        for (std::map<int, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
+        for (std::map<string, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
         {
           auto right = *it;
           if (graph->is_linked(left.first, right.first)) {
@@ -29,7 +29,7 @@ void GraphView::paintEvent(QPaintEvent *event)
     }
 
     painter.setPen(QPen(Qt::yellow, 2));
-    for (std::map<int, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
+    for (std::map<string, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
     {
       auto el = *it;
       Vertex2D value = el.second;
@@ -39,37 +39,37 @@ void GraphView::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
-void GraphView::setGraph(IGraph<int> *igraph)
+void GraphView::setGraph(IGraph<string> *igraph)
 {
     position.clear();
     this->graph = igraph;
-    selectedIndex = -1;
+    selectedIndex = "";
 
-    for(AbstractIterator<int> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it) {
-        Vertex<int>& el = dynamic_cast<Vertex<int>&>(const_cast<AbstractComponent<int>&>(**it));
-        int id = el.getValue();
+    for(AbstractIterator<string> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it) {
+        Vertex<string>& el = dynamic_cast<Vertex<string>&>(const_cast<AbstractComponent<string>&>(**it));
+        string id = el.getValue();
         position[id] = Vertex2D(CIRCLE_RAD, CIRCLE_RAD);
     }
 
     update();
 }
 
-void GraphView::setPos(map<int, Vertex2D> new_pos) {
+void GraphView::setPos(map<string, Vertex2D> new_pos) {
     this->position = new_pos;
     update();
 }
 
-IGraph<int>* GraphView::getGraph() {
+IGraph<string>* GraphView::getGraph() {
     return graph;
 }
 
-map<int, Vertex2D> GraphView::getPos() {
+map<string, Vertex2D> GraphView::getPos() {
     return position;
 }
 
 void GraphView::mouseMoveEvent(QMouseEvent *event)
 {
-    if (selectedIndex != -1) {
+    if (selectedIndex != "") {
         QPointF pf = event->localPos();
         position[selectedIndex] = Vertex2D(pf.x(), pf.y());
         update();
@@ -80,7 +80,7 @@ void GraphView::mousePressEvent(QMouseEvent *event)
 {
     QPointF pf = event->localPos();
     QPoint pos = QPoint(pf.x(), pf.y());
-    for (std::map<int, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it) {
+    for (std::map<string, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it) {
         auto el = *it;
         Vertex2D p = el.second;
         QPoint left = QPoint(p.x - CIRCLE_RAD, p.y - CIRCLE_RAD);

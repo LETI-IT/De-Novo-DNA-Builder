@@ -15,16 +15,16 @@ class GraphView : public QWidget
     Q_OBJECT
 private:
     const int CIRCLE_RAD = 10;
-    int selectedIndex;
-    IGraph<int> *graph;
-    map<int, Vertex2D> position;
+    string selectedIndex;
+    IGraph<string> *graph;
+    map<string, Vertex2D> position;
     bool isIntersect(QRect r, QPoint p);
 public:
     explicit GraphView(QWidget *parent = 0);
-    void setGraph(IGraph<int> *);
-    void setPos(map<int, Vertex2D>);
-    IGraph<int> * getGraph();
-    map<int, Vertex2D> getPos();
+    void setGraph(IGraph<string> *);
+    void setPos(map<string, Vertex2D>);
+    IGraph<string> * getGraph();
+    map<string, Vertex2D> getPos();
 protected:
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void mousePressEvent(QMouseEvent *);
