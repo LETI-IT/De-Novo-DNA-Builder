@@ -130,10 +130,16 @@ void MainWindow::loadFromKmers() {
        inputFile.close();
        string str = content.toStdString();
        std::istringstream stm(str);
-       IGraph<string> *p_digraph = DeBrojinGraphGenerator::generate(stm);
+       try {
+            IGraph<string> *p_digraph = DeBrojinGraphGenerator::generate(stm);
+            //TODO: for string graph or generic
+     //       ui->graph->setGraph(p_digraph);
+       } catch (DeBrujnGraphException& e) {
+           QMessageBox messageBox;
+           messageBox.critical(0, "Error", e.what());
+           messageBox.setFixedSize(500, 200);
+       }
 
-       //TODO: for string graph or generic
-//       ui->graph->setGraph(p_digraph);
     }
 
 }

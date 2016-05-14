@@ -22,8 +22,7 @@ SOURCES += main.cpp\
     edge.cpp \
     vertexiterator.cpp \
     vertex.cpp \
-    eulerianadapter.cpp \
-    debrojingraphgenerator.cpp
+    eulerianadapter.cpp
 
 HEADERS  += mainwindow.h \
     digraph.h \
@@ -42,7 +41,8 @@ HEADERS  += mainwindow.h \
     abstractdigraph.h \
     manipulator.h \
     graphallocator.h \
-    debrojingraphgenerator.h
+    debrojingraphgenerator.h \
+    debrujngraphexception.h
 
 FORMS    += mainwindow.ui
 

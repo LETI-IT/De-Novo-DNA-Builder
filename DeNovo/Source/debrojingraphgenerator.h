@@ -2,6 +2,7 @@
 #define DEBROJINGRAPHGENERATOR_H
 
 #include "digraph.h"
+#include "debrujngraphexception.h"
 
 class DeBrojinGraphGenerator
 {
@@ -15,8 +16,7 @@ public:
 
         while (kmers >> kmer) {
             if (kmer.size() != k) {
-//                throw new IllegalKmerFormatException();
-                throw -1;
+                throw DeBrujnGraphException("Wrong kmer size");
             }
             string prefix = kmer.substr(0, k-1);
             string suffix = kmer.substr(1, k-1);

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "graphview.h"
 #include "debrojingraphgenerator.h"
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
