@@ -29,6 +29,7 @@ private Q_SLOTS:
     void test_reacheble();
     void test_in_degree();
     void test_out_degree();
+    void test_int_vertex();
     void test_transpose();
 
     void graphTestLinkage();
@@ -101,6 +102,8 @@ void TestSuiteTest::test_in_degree()
 
 void TestSuiteTest::test_out_degree()
 {
+    cout << "##### " << __FUNCTION__ << " #####" << endl;
+
      AbstractDigraph<test_vertex_type>* testGraph = TestGraphFactory::newInstance<test_vertex_type>(test_mode);
      testGraph->add_link(0,1);
      testGraph->add_link(1,2);
@@ -110,7 +113,7 @@ void TestSuiteTest::test_out_degree()
      testGraph->add_link(5,1);
      QCOMPARE(testGraph->out_degree(1),4);
 
-     // TODO: Broken iterator
+     int expectedCnt = 6, actualCnt = 0;
      IGraph<string> *g = new Digraph<string>();
      g->add_link("0","1");
      g->add_link("1","2");
@@ -121,6 +124,25 @@ void TestSuiteTest::test_out_degree()
      for(AbstractIterator<string> *it = g->begin(VERTEX); **it != **g->end(VERTEX); ++*it) {
          Vertex<string>& el = dynamic_cast<Vertex<string>&>(const_cast<AbstractComponent<string>&>(**it));
          qDebug() << QString::fromStdString(el.getValue());
+         actualCnt++;
+     }
+
+     QCOMPARE(actualCnt, expectedCnt);
+}
+
+void TestSuiteTest::test_int_vertex()
+{
+    cout << "##### " << __FUNCTION__ << " #####" << endl;
+
+     IGraph<int> *g = new Digraph<int>();
+     g->add_link(0,1);
+     g->add_link(1,2);
+     g->add_link(1,3);
+     g->add_link(1,4);
+     g->add_link(1,5);
+     g->add_link(5,1);
+     for(AbstractIterator<int> *it = g->begin(VERTEX); **it != **g->end(VERTEX); ++*it) {
+         cout << framing::frame << **it << endl;
      }
 }
 

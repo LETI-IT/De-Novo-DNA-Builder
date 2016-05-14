@@ -21,16 +21,19 @@ VertexIterator<T>::VertexIterator(map<T, vector<T>, less<T>, GraphAllocator<pair
     {
         if (!is_init)
         {
-            T temp = digraph_ptr->end()->first;
-//            temp++;
+            it_vtx = --digraph_ptr->end();
+            T temp = it_vtx->first;
             temp += temp;
-            digraph_ptr->operator [](temp).push_back(0);
+            digraph_ptr->operator [](temp).push_back(temp);
+
             is_init = true;
         }
-        it_vtx = digraph_ptr->end();
+
+        it_vtx = --digraph_ptr->end();
     }
 
     ptr = new Vertex<T>(it_vtx->first);
+
 }
 
 template<class T>
