@@ -60,6 +60,10 @@ public:
     AbstractDigraph<T, Allocator>* get_transpose(){
         return NULL;
     }
+
+    bool hasNode(T v) {
+        return true;
+    }
 };
 
 

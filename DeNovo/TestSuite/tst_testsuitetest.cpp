@@ -28,6 +28,7 @@ private Q_SLOTS:
     void test_transpose();
 
     void graphShoultBeCreated();
+    void graphShouldCheckExistingElementsRight();
 };
 
 TestSuiteTest::TestSuiteTest()
@@ -108,6 +109,15 @@ void TestSuiteTest::graphShoultBeCreated()
     std::istringstream stm(str);
     Digraph<string>* graph = DeBrojinGraphGenerator::generate(stm);
     QCOMPARE((graph != NULL), true);
+}
+
+void TestSuiteTest::graphShouldCheckExistingElementsRight() {
+    Digraph<string>* graph = new Digraph<string>();
+    graph->add_link("AA", "BB");
+
+    QCOMPARE((graph->hasNode("AA")), true);
+    QCOMPARE((graph->hasNode("BB")), true);
+    QCOMPARE((graph->hasNode("CC")), false);
 }
 
 QTEST_APPLESS_MAIN(TestSuiteTest)
