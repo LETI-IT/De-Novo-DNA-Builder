@@ -15,10 +15,12 @@ class GraphView : public QWidget
     Q_OBJECT
 private:
     const int CIRCLE_RAD = 10;
+    const int ARROW_RAD = 2;
     string selectedIndex;
     IGraph<string> *graph;
     map<string, Vertex2D> position;
     bool isIntersect(QRect r, QPoint p);
+    QPoint getArrowCenter(QPoint begin, QPoint end);
 public:
     explicit GraphView(QWidget *parent = 0);
     void setGraph(IGraph<string> *);

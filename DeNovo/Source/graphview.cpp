@@ -3,6 +3,7 @@
 #include <QBitmap>
 #include <QDebug>
 #include "vertex.h"
+#include <math.h>
 
 GraphView::GraphView(QWidget *parent) : QWidget(parent)
 {
@@ -24,6 +25,9 @@ void GraphView::paintEvent(QPaintEvent *event)
             auto lPoint = QPoint(left.second.x, left.second.y);
             auto rPoint = QPoint(right.second.x, right.second.y);
             painter.drawLine(lPoint, rPoint);
+
+            auto arrCenter = this->getArrowCenter(lPoint, rPoint);
+            painter.drawEllipse(arrCenter, ARROW_RAD, ARROW_RAD);
           }
         }
     }
@@ -33,8 +37,10 @@ void GraphView::paintEvent(QPaintEvent *event)
     {
       auto el = *it;
       Vertex2D value = el.second;
+      string text = el.first;
       QPoint p = QPoint(value.x, value.y);
       painter.drawEllipse(p, CIRCLE_RAD, CIRCLE_RAD);
+      painter.drawText(p, QString::fromStdString(text));
     }
     painter.end();
 }
@@ -105,3 +111,24 @@ bool GraphView::isIntersect(QRect r, QPoint p)
             && p.x()<=r.bottomRight().x() && p.y()<=r.bottomRight().y();
 }
 
+
+QPoint GraphView::getArrowCenter(QPoint begin, QPoint end) {
+    int x, y;
+    auto xDiff = begin.x() - end.x();
+    auto yDiff = begin.y() - end.y();
+    auto len = sqrt(pow(xDiff, 2) + pow(yDiff, 2));
+
+    if (abs(xDiff) == 0) {
+        x = begin.x();
+    } else {
+        x = begin.x() + ARROW_RAD * xDiff / len;
+    }
+
+    if (abs(yDiff) == 0) {
+        y = begin.y();
+    } else {
+        y = begin.y() + ARROW_RAD * yDiff / len;
+    }
+
+    return QPoint(x, y);
+}
