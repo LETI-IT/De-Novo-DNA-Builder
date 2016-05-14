@@ -2,6 +2,7 @@
 #include <QtTest>
 #include "mocfactory.h"
 #include "debrojingraphgenerator.h"
+#include <algorithm>
 
 class TestSuiteTest : public QObject
 {
@@ -29,6 +30,7 @@ private Q_SLOTS:
 
     void graphShoultBeCreated();
     void graphShouldCheckExistingElementsRight();
+    void generatorTest();
 };
 
 TestSuiteTest::TestSuiteTest()
@@ -119,6 +121,37 @@ void TestSuiteTest::graphShouldCheckExistingElementsRight() {
     QCOMPARE((graph->hasNode("BB")), true);
     QCOMPARE((graph->hasNode("CC")), false);
 }
+
+bool isExistsInVector(vector<string>& vec, string val) {
+    return find(vec.begin(), vec.end(), val) != vec.end();
+}
+
+void TestSuiteTest::generatorTest() {
+    const string str = "3"
+                       "BBA "
+                       "BAA "
+                       "AAA "
+                       "AAB "
+                       "ABB "
+                       "BBA ";
+    std::istringstream stm(str);
+    Digraph<string>* graph = DeBrojinGraphGenerator::generate(stm);
+
+    vector<string> adj = graph->adjacency("AA");
+    QCOMPARE((isExistsInVector(adj, "AB")), true);
+    QCOMPARE((isExistsInVector(adj, "AA")), true);
+
+    adj = graph->adjacency("BB");
+    QCOMPARE((isExistsInVector(adj, "BA")), true);
+
+    adj = graph->adjacency("BA");
+    QCOMPARE((isExistsInVector(adj, "AA")), true);
+
+    adj = graph->adjacency("AB");
+    QCOMPARE((isExistsInVector(adj, "BA")), false);
+    QCOMPARE((isExistsInVector(adj, "BB")), true);
+}
+
 
 QTEST_APPLESS_MAIN(TestSuiteTest)
 
