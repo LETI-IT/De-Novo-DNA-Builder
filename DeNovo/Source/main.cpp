@@ -39,12 +39,12 @@ int main(int argc, char *argv[])
 //    }
 
     //test eulerian graph
-//    vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
-//    cout << "Eulerian cycle: ";
-//    for (typename vector<int>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
-//        cout << *it << " ";
-//    }
-//    cout << endl;
+    vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
+    cout << "Eulerian cycle: ";
+    for (typename vector<int>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
 
 
     //for test: manipulator.

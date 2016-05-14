@@ -5,6 +5,7 @@
 #include "graphview.h"
 #include "debrojingraphgenerator.h"
 #include <QMessageBox>
+#include "euleriancircuit.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +26,7 @@ public slots:
     void loadPosition();
     void savePosition();
     void loadFromKmers();
+    void checkEuler();
 private:
     Ui::MainWindow *ui;
 };

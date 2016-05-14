@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLoad_position, SIGNAL(triggered(bool)), this, SLOT(loadPosition()));
     connect(ui->actionSave_position, SIGNAL(triggered(bool)), this, SLOT(savePosition()));
     connect(ui->actionImport_kmers, SIGNAL(triggered(bool)), this, SLOT(loadFromKmers()));
+    connect(ui->actionFind_Euler_Path, SIGNAL(triggered(bool)), this, SLOT(checkEuler()));
 }
 
 MainWindow::~MainWindow()
@@ -142,4 +143,14 @@ void MainWindow::loadFromKmers() {
 
     }
 
+}
+
+void MainWindow::checkEuler() {
+    Digraph<int>* graph = dynamic_cast<Digraph<int>*>(ui->graph->getGraph());
+    vector<int> euCycle = EulerianCercuit::getEulerianCircuitVerticies(graph);
+    cout << "Eulerian cycle: ";
+    for (typename vector<int>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
 }

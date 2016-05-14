@@ -55,6 +55,7 @@
     <property name="title">
      <string>Tool</string>
     </property>
+    <addaction name="actionFind_Euler_Path"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -98,6 +99,11 @@
   <action name="actionImport_kmers">
    <property name="text">
     <string>import kmers...</string>
+   </property>
+  </action>
+  <action name="actionFind_Euler_Path">
+   <property name="text">
+    <string>Find Euler Path</string>
    </property>
   </action>
  </widget>
