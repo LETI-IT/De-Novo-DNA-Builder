@@ -198,16 +198,23 @@ void TestSuiteTest::graphTestForeach() {
 //    std::istringstream stm("1 4 4 3 ");
 //    p_digraph->add_links(stm);
 
+//    p_digraph->add_link(0,1);
+//    p_digraph->add_link(1,2);
+
     p_digraph->add_link(0,1);
     p_digraph->add_link(1,2);
+    p_digraph->add_link(1,3);
+    p_digraph->add_link(1,4);
+    p_digraph->add_link(1,5);
+    p_digraph->add_link(5,1);
 
     cout << "foreach edge" << endl;
-    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); *it != &*p_digraph->end(EDGE); ++*it)
+    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
     {
         cout << framing::frame << **it << endl;
     }
 
-    //for test: iterable vertexes.
+    VertexIterator<int>::resetInit();
     cout << "foreach vertex" << endl;
     for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); *it != &*p_digraph->end(VERTEX); ++*it)
     {

@@ -4,6 +4,12 @@ template<class T>
 bool VertexIterator<T>::is_init = false;
 
 template<class T>
+void VertexIterator<T>::resetInit()
+{
+    is_init = false;
+}
+
+template<class T>
 VertexIterator<T>::VertexIterator()
 {
 
@@ -15,7 +21,7 @@ VertexIterator<T>::VertexIterator(map<T, vector<T>, less<T>, GraphAllocator<pair
     if (!reverse)
     {
         it_vtx = digraph_ptr->begin();
-        cout << "begin iter: " << it_vtx->first << endl;
+//        cout << "begin iter: " << it_vtx->first << endl;
     }
     else
     {
@@ -29,16 +35,21 @@ VertexIterator<T>::VertexIterator(map<T, vector<T>, less<T>, GraphAllocator<pair
             is_init = true;
         }
 
-        it_vtx = --digraph_ptr->end();
+        it_vtx = digraph_ptr->end();
+        --it_vtx;
+//        cout << "it_vtx: " << it_vtx->first << endl;
     }
 
-    ptr = new Vertex<T>(it_vtx->first);
+//    cout << "it_vtx point: " << it_vtx->first << endl;
+
+//    ptr = new Vertex<T>(it_vtx->first);
 
 }
 
 template<class T>
 Vertex<T>& VertexIterator<T>::operator*() const
 {
+    Vertex<T> * ptr = new Vertex<T>(it_vtx->first);
     return (*ptr);
 }
 
@@ -46,8 +57,6 @@ template<class T>
 VertexIterator<T>& VertexIterator<T>::operator++()
 {
     it_vtx++;
-    ptr = new Vertex<T>(it_vtx->first);
-
     return (*this);
 }
 
@@ -55,8 +64,6 @@ template<class T>
 VertexIterator<T>& VertexIterator<T>::operator--()
 {
     it_vtx--;
-    ptr = new Vertex<T>(it_vtx->first);
-
     return (*this);
 }
 
@@ -79,8 +86,6 @@ VertexIterator<T>& VertexIterator<T>::operator--(int) //postdec.
 template<class T>
 bool VertexIterator<T>::operator==(const AbstractIterator<T> *it_other) const
 {
-//    return (this->get_ptr() == it_other->get_ptr());
-
     VertexIterator * it = dynamic_cast<VertexIterator<T>*>(const_cast<AbstractIterator<T>*>(it_other));
     return this->it_vtx == it->it_vtx;
 }
@@ -88,12 +93,9 @@ bool VertexIterator<T>::operator==(const AbstractIterator<T> *it_other) const
 template<class T>
 bool VertexIterator<T>::operator!=(const AbstractIterator<T> *it_other) const
 {
-//    return (this->get_ptr() != it_other->get_ptr());
     VertexIterator * it = dynamic_cast<VertexIterator<T>*>(const_cast<AbstractIterator<T>*>(it_other));
     return this->it_vtx != it->it_vtx;
 }
-
-
 
 template class VertexIterator<int>;
 template class VertexIterator<string>;
