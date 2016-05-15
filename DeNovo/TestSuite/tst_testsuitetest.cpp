@@ -42,7 +42,8 @@ private Q_SLOTS:
     void generatorTest();
 
     void eulerianCircleTest();
-    void manipulatorTest();
+    void test_is_eulerian();
+    void test_is_not_eulerian();
 };
 
 TestSuiteTest::TestSuiteTest()
@@ -281,13 +282,28 @@ void TestSuiteTest::eulerianCircleTest() {
     QCOMPARE(euCycle.at(3), 1);
 }
 
-void TestSuiteTest::manipulatorTest() {
-    //TODO:
-//    Vertex<int> v(5);
-//    std::istringstream stm();
-//    stm << framing::frame << v << endl;
-//    QCOMPARE(stm.str(), "{5}");
+void TestSuiteTest::test_is_not_eulerian() {
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    std::istringstream stm("1 2 2 3 3 4");
+    p_digraph->add_links(stm);
+    vector<int> result = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
+    QCOMPARE(EulerianCercuit::isEulerian(p_digraph), false);
+    QCOMPARE((int)result.size(), 0);
 }
+
+void TestSuiteTest::test_is_eulerian() {
+    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    std::istringstream stm("1 4 "
+                           "4 5 "
+                           "5 1 "
+                           "1 3 "
+                           "3 2 "
+                           "2 1 ");
+    p_digraph->add_links(stm);
+
+    QCOMPARE(EulerianCercuit::isEulerian(p_digraph), true);
+}
+
 
 
 QTEST_APPLESS_MAIN(TestSuiteTest)
