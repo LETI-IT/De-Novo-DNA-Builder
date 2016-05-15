@@ -9,7 +9,10 @@ public:
     static vector<T> getEulerianCircuitVerticies(AbstractDigraph<T>* graph)
     {
         EulerianAdapter<T> euAdapter(graph);
-        return euAdapter.getEulerCircuit();
+        if(EulerianCercuit::isEulerian(graph))
+            return euAdapter.getEulerCircuit();
+        else
+            return vector<T>();
     }
 
     template<class T>

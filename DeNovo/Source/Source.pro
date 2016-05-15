@@ -44,9 +44,6 @@ HEADERS  += mainwindow.h \
     debrojingraphgenerator.h \
     debrujngraphexception.h
 
-RESOURCES += 1.txt \
-    2.txt
-
 FORMS    += mainwindow.ui
 
 DISTFILES += \
