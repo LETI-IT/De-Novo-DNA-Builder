@@ -1,0 +1,9 @@
+{
+  "title": "De Novo DNA Builder",
+  "background": "background.png",
+  "icon-size": 80,
+  "contents": [
+    { "x": 200, "y": 150, "type": "file", "path": "De Novo DNA Builder" },
+    { "x": 400, "y": 150, "type": "link", "path": "/Applications" }
+  ]
+}
