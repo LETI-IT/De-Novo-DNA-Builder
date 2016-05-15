@@ -18,19 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graph->setAutoFillBackground(true);
     ui->graph->setPalette(Pal);
 
-//    IGraph<int> *p_digraph = new Digraph<int>();
-//    const string str = "1 2  1 7  1 8  "
-//                "2 3  2 6  2 10  "
-//                "3 4  3 5  3 11  "
-//                "6 10  6 12  "
-//                "8 9  8 12  "
-//                "9 10  9 11  "
-//                "11 7  "
-//                "12 5";
-//    std::istringstream stm(str);
-//    p_digraph->add_links(stm);
-//    ui->graph->setGraph(p_digraph);
-
     connect(ui->actionLoad_graph, SIGNAL(triggered(bool)), this, SLOT(loadGraph()));
     connect(ui->actionLoad_position, SIGNAL(triggered(bool)), this, SLOT(loadPosition()));
     connect(ui->actionSave_position, SIGNAL(triggered(bool)), this, SLOT(savePosition()));
@@ -44,6 +31,15 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::loadGraph() {
+
+    if (!loadGraphFromFile()) {
+        QMessageBox messageBox;
+        messageBox.critical(0, "Error", "Возникла ошибка при считывании из файла");
+        messageBox.setFixedSize(500, 200);
+    }
+}
+
+bool MainWindow::loadGraphFromFile() {
     QString filePath = QFileDialog::getOpenFileName(
                        this, tr("Open File"), "",
                        tr("Text (*.txt)"));
@@ -59,16 +55,23 @@ void MainWindow::loadGraph() {
                qDebug() << line;
                QRegExp rx("(\\ |\\n|\\n\r)");
                auto items = line.split(rx);
+               if (items.size() % 2 != 0)
+                   return false;
                for (int i = 0; i < items.size(); i=i+2) {
-                   auto first = items[i];
-                   auto second = items[i+1];
-                   p_digraph->add_link(items[i].toStdString(), items[i+1].toStdString());
+                   auto first = items[i].toStdString();
+                   auto second = items[i+1].toStdString();
+                   if (first.size() == 0 || second.size() == 0)
+                       return false;
+                   p_digraph->add_link(first, second);
                }
 //           }
            ui->graph->setGraph(p_digraph);
            inputFile.close();
+           return true;
         }
     }
+
+    return false;
 }
 
 void MainWindow::saveGraph() {
@@ -76,6 +79,15 @@ void MainWindow::saveGraph() {
 }
 
 void MainWindow::loadPosition() {
+   if (!loadPositionFromFile()) {
+        QMessageBox messageBox;
+        messageBox.critical(0, "Error", "Возникла ошибка при записи в файл");
+        messageBox.setFixedSize(500, 200);
+   }
+}
+
+bool MainWindow::loadPositionFromFile()
+{
     QString filePath = QFileDialog::getOpenFileName(
                        this, tr("Open File"), "",
                        tr("Text (*.txt)"));
@@ -90,18 +102,33 @@ void MainWindow::loadPosition() {
            map<string, Vertex2D> new_pos;
            while (!in.atEnd()) {
                auto line = in.readLine();
-               auto items = line.split(" ");
+               QRegExp rx("(\\ |\\n|\\n\r)");
+               auto items = line.split(rx);
+               if (items.size() % 3 != 0)
+                   return false;
                for (int i = 0; i < items.size(); i=i+3) {
+                   bool flag = false;
                    id = items[i].toStdString();
-                   x = items[i+1].toInt();
-                   y = items[i+2].toInt();
+                   if (id.size() == 0)
+                       return false;
+                   x = items[i+1].toInt(&flag, 10);
+                   if (!flag || x < 0 || x > ui->graph->width()) {
+                        return false;
+                   }
+                   y = items[i+2].toInt(&flag, 10);
+                   if (!flag || y < 0 || y > ui->graph->height()) {
+                        return false;
+                   }
                    new_pos[id] = Vertex2D(x, y);
                }
            }
 
            ui->graph->setPos(new_pos);
+           return true;
         }
     }
+
+    return false;
 }
 
 void MainWindow::savePosition() {
@@ -127,8 +154,13 @@ void MainWindow::savePosition() {
            string str = stm.str();
            datFile.write(str.c_str(), str.length());
            datFile.close();
+           return;
         }
     }
+
+    QMessageBox messageBox;
+    messageBox.critical(0, "Error", "Возникла ошибка при записи в файл");
+    messageBox.setFixedSize(500, 200);
 }
 
 void MainWindow::loadFromKmers() {
@@ -156,17 +188,25 @@ void MainWindow::loadFromKmers() {
            messageBox.critical(0, "Error", e.what());
            messageBox.setFixedSize(500, 200);
        }
-
     }
-
 }
 
 void MainWindow::checkEuler() {
     Digraph<string>* graph = dynamic_cast<Digraph<string>*>(ui->graph->getGraph());
-    vector<string> euCycle = EulerianCercuit::getEulerianCircuitVerticies(graph);
-    cout << "Eulerian cycle: ";
-    for (typename vector<string>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
-        cout << *it << " ";
+    if (EulerianCercuit::isEulerian(graph)) {
+        vector<string> euCycle = EulerianCercuit::getEulerianCircuitVerticies(graph);
+        QString result = QString();
+        for (typename vector<string>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
+            result = result.append(QString::fromStdString(*it)).append(" -> ");
+        }
+
+        QMessageBox messageBox;
+        messageBox.setWindowTitle("Эйлеров цикл найден");
+        messageBox.setText(result);
+        messageBox.setFixedSize(500, 200);
+    } else {
+        QMessageBox messageBox;
+        messageBox.critical(0, "Эйлеров цикл не найден", "");
+        messageBox.setFixedSize(500, 200);
     }
-    cout << endl;
 }

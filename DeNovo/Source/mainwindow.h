@@ -22,8 +22,10 @@ public:
 
 public slots:
     void loadGraph();
+    bool loadGraphFromFile();
     void saveGraph();
     void loadPosition();
+    bool loadPositionFromFile();
     void savePosition();
     void loadFromKmers();
     void checkEuler();

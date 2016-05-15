@@ -79,8 +79,8 @@ map<string, Vertex2D> GraphView::getPos() {
 
 void GraphView::mouseMoveEvent(QMouseEvent *event)
 {
-    if (selectedIndex != "") {
-        QPointF pf = event->localPos();
+    QPointF pf = event->localPos();
+    if (selectedIndex != "" && pf.x() > 0 && pf.x() < this->width() && pf.y() > 0 && pf.y() < this->height()) {
         position[selectedIndex] = Vertex2D(pf.x(), pf.y());
         update();
     }
@@ -106,7 +106,7 @@ void GraphView::mousePressEvent(QMouseEvent *event)
 
 void GraphView::mouseReleaseEvent(QMouseEvent *)
 {
-    selectedIndex = -1;
+    selectedIndex = "";
 }
 
 bool GraphView::isIntersect(QRect r, QPoint p)
