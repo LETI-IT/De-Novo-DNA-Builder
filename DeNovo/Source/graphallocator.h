@@ -17,7 +17,7 @@ public:
 
     pointer allocate(size_type n, const void* hint=0)
     {
-        std::cout << "Alloc " << n * sizeof(T) << " bytes." << std::endl;
+//        std::cout << "Alloc " << n * sizeof(T) << " bytes." << std::endl; //!
         T* t = (T*) malloc(n * sizeof(T));
         return t;
 
@@ -27,7 +27,7 @@ public:
 
     void deallocate(pointer p, size_type n)
     {
-        std::cout << "Dealloc " << n * sizeof(T) << " bytes (" << p << ")." << std::endl;
+//        std::cout << "Dealloc " << n * sizeof(T) << " bytes (" << p << ")." << std::endl; //!
         free(p);
 
 //        fprintf(stderr, "Dealloc %d bytes (%p).\n", n * sizeof(T), p);
@@ -36,7 +36,7 @@ public:
 
     GraphAllocator() throw(): std::allocator<T>()
     {
-        std::cout << "Init allocator" << std::endl;
+//        std::cout << "Init allocator" << std::endl; //!
 //        fprintf(stderr, "Init allocator\n");
     }
 

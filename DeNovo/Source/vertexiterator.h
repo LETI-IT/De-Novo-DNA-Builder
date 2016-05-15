@@ -24,8 +24,6 @@ public:
     VertexIterator& operator--(int);
     bool operator==(const AbstractIterator<T> *it_other) const;
     bool operator!=(const AbstractIterator<T> *it_other) const;
-
-    AbstractComponent<T>* get_ptr() const;
 };
 
 #endif // VERTEXITERATOR_H

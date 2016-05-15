@@ -192,23 +192,27 @@ void TestSuiteTest::graphTestReachability()
 }
 
 void TestSuiteTest::graphTestForeach() {
+    cout << "##### " << __FUNCTION__ << " #####" << endl;
+
     AbstractDigraph<int> *p_digraph = new Digraph<int>();
-    std::istringstream stm("1 4 4 3 ");
-    p_digraph->add_links(stm);
+//    std::istringstream stm("1 4 4 3 ");
+//    p_digraph->add_links(stm);
 
-    //TODO: fix
-//    cout << "foreach edge" << endl;
-//    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
-//    {
-//        cout << framing::frame << **it << endl;
-//    }
+    p_digraph->add_link(0,1);
+    p_digraph->add_link(1,2);
 
-//    //for test: iterable vertexes.
-//    cout << "foreach vertex" << endl;
-//    for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); **it != **p_digraph->end(VERTEX); ++*it)
-//    {
-//        cout << **it << endl;
-//    }
+    cout << "foreach edge" << endl;
+    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); *it != &*p_digraph->end(EDGE); ++*it)
+    {
+        cout << framing::frame << **it << endl;
+    }
+
+    //for test: iterable vertexes.
+    cout << "foreach vertex" << endl;
+    for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); *it != &*p_digraph->end(VERTEX); ++*it)
+    {
+        cout << framing::frame << **it << endl;
+    }
 }
 
 void TestSuiteTest::graphShoultBeCreated()

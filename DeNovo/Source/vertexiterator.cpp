@@ -79,21 +79,20 @@ VertexIterator<T>& VertexIterator<T>::operator--(int) //postdec.
 template<class T>
 bool VertexIterator<T>::operator==(const AbstractIterator<T> *it_other) const
 {
-    return (this->get_ptr() == it_other->get_ptr());
+//    return (this->get_ptr() == it_other->get_ptr());
+
+    VertexIterator * it = dynamic_cast<VertexIterator<T>*>(const_cast<AbstractIterator<T>*>(it_other));
+    return this->it_vtx == it->it_vtx;
 }
 
 template<class T>
 bool VertexIterator<T>::operator!=(const AbstractIterator<T> *it_other) const
 {
-    return (this->get_ptr() != it_other->get_ptr());
+//    return (this->get_ptr() != it_other->get_ptr());
+    VertexIterator * it = dynamic_cast<VertexIterator<T>*>(const_cast<AbstractIterator<T>*>(it_other));
+    return this->it_vtx != it->it_vtx;
 }
 
-
-template<class T>
-AbstractComponent<T>* VertexIterator<T>::get_ptr() const
-{
-    return ptr;
-}
 
 
 template class VertexIterator<int>;

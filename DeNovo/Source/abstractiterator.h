@@ -20,8 +20,6 @@ public:
     virtual AbstractIterator& operator--(int) = 0;
     virtual bool operator==(const AbstractIterator<T> *it_other) const = 0;
     virtual bool operator!=(const AbstractIterator<T> *it_other) const = 0;
-
-    virtual AbstractComponent<T>* get_ptr() const = 0;
 };
 
 #endif // ITERATOR
