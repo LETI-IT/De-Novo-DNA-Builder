@@ -14,8 +14,8 @@ class GraphView : public QWidget
 {
     Q_OBJECT
 private:
-    const int CIRCLE_RAD = 10;
-    const int ARROW_RAD = 2;
+    const int CIRCLE_RAD = 20;
+    const int ARROW_RAD = 8;
     string selectedIndex;
     IGraph<string> *graph;
     map<string, Vertex2D> position;

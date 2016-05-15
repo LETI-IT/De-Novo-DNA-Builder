@@ -14,7 +14,7 @@ void GraphView::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.setPen(QPen(Qt::red, 2));
-
+    painter.setBrush( QBrush( Qt::red ) );
     for (std::map<string, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
     {
         auto left = *it;
@@ -32,15 +32,19 @@ void GraphView::paintEvent(QPaintEvent *event)
         }
     }
 
-    painter.setPen(QPen(Qt::yellow, 2));
     for (std::map<string, Vertex2D>::iterator it = position.begin(); it != position.end(); ++it)
     {
       auto el = *it;
       Vertex2D value = el.second;
       string text = el.first;
       QPoint p = QPoint(value.x, value.y);
+      painter.setPen(QPen(Qt::yellow, 2));
+      painter.setBrush( QBrush( Qt::yellow ) );
       painter.drawEllipse(p, CIRCLE_RAD, CIRCLE_RAD);
-      painter.drawText(p, QString::fromStdString(text));
+
+      QRect rect = QRect(p.x()-CIRCLE_RAD, p.y()-CIRCLE_RAD, CIRCLE_RAD*2, CIRCLE_RAD*2);
+      painter.setPen(QPen(Qt::blue, 2));
+      painter.drawText(rect, Qt::AlignCenter, QString::fromStdString(text));
     }
     painter.end();
 }
@@ -119,15 +123,15 @@ QPoint GraphView::getArrowCenter(QPoint begin, QPoint end) {
     auto len = sqrt(pow(xDiff, 2) + pow(yDiff, 2));
 
     if (abs(xDiff) == 0) {
-        x = begin.x();
+        x = end.x();
     } else {
-        x = begin.x() + ARROW_RAD * xDiff / len;
+        x = end.x() + CIRCLE_RAD * xDiff / len;
     }
 
     if (abs(yDiff) == 0) {
-        y = begin.y();
+        y = end.y();
     } else {
-        y = begin.y() + ARROW_RAD * yDiff / len;
+        y = end.y() + CIRCLE_RAD * yDiff / len;
     }
 
     return QPoint(x, y);
