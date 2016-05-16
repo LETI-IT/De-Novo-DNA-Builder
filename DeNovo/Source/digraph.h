@@ -30,7 +30,6 @@ private:
 public:
     Digraph();
     ~Digraph();
-
     // Add link between two values
     void add_link(T v1, T v2);
     // Read all values from stream and add links between them

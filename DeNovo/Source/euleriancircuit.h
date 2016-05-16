@@ -11,10 +11,7 @@ public:
     static vector<T> getEulerianCircuitVerticies(AbstractDigraph<T>* graph)
     {
         EulerianAdapter<T> euAdapter(graph);
-        if(EulerianCercuit::isEulerian(graph))
-            return euAdapter.getEulerCircuit();
-        else
-            return vector<T>();
+        return euAdapter.getEulerCircuit();
     }
 
     // Check whether the graph has eulerian cycle

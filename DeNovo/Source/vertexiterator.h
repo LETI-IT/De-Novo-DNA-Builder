@@ -27,6 +27,7 @@ public:
     bool operator==(const AbstractIterator<T> *it_other) const;
     bool operator!=(const AbstractIterator<T> *it_other) const;
 
+
     static void resetInit();
 };
 

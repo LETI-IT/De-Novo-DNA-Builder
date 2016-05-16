@@ -38,8 +38,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionLoad_graph"/>
-    <addaction name="separator"/>
     <addaction name="actionLoad_position"/>
     <addaction name="actionSave_position"/>
     <addaction name="separator"/>

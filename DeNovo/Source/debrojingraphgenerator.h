@@ -31,6 +31,27 @@ public:
             graph->add_link(prefix, suffix);
         }
 
+        string* items = new string[2];
+        int index = 0;
+        VertexIterator<string>::resetInit();
+        for(AbstractIterator<string> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
+        {
+            Vertex<string>& vertex = static_cast<Vertex<string>&>(**it);
+            if(graph->in_degree(vertex.getValue()) != graph->out_degree(vertex.getValue())) {
+                if (index >= 2)
+                   throw DeBrujnGraphException("Wrong input data");
+
+                items[index] = vertex.getValue();
+                index++;
+            }
+        }
+
+        if (index != 2)
+           throw DeBrujnGraphException("Wrong input data.");
+        else if (graph->in_degree(items[0]) > graph->out_degree(items[0]))
+           graph->add_link(items[0], items[1]);
+        else
+           graph->add_link(items[1], items[0]);
         return graph;
     }
 

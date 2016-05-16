@@ -22,6 +22,7 @@ bool EulerianAdapter<T>::isEulerianCycle()
         return false;
 
     // Check if in degree and out degree of every vertex is same
+    VertexIterator<T>::resetInit();
     for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
     {
         Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
@@ -36,7 +37,8 @@ vector<T> EulerianAdapter<T>::getEulerCircuit()
 {
     if(isEulerianCycle()){
         return this->eulerianCircuit;
-    }
+    } else
+        return vector<T>();
 }
 
 template<typename T>

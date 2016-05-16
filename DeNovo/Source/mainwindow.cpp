@@ -66,6 +66,7 @@ bool MainWindow::loadGraphFromFile() {
                }
 //           }
            ui->graph->setGraph(p_digraph);
+           result.clear();
            inputFile.close();
            return true;
         }
@@ -81,7 +82,7 @@ void MainWindow::saveGraph() {
 void MainWindow::loadPosition() {
    if (!loadPositionFromFile()) {
         QMessageBox messageBox;
-        messageBox.critical(0, "Error", "Возникла ошибка при записи в файл");
+        messageBox.critical(0, "Error", "Возникла ошибка при считывании из файла");
         messageBox.setFixedSize(500, 200);
    }
 }
@@ -96,12 +97,12 @@ bool MainWindow::loadPositionFromFile()
         if (inputFile.open(QIODevice::ReadOnly))
         {
            QTextStream in(&inputFile);
-           inputFile.close();
+
            string id;
            int x, y;
            map<string, Vertex2D> new_pos;
-           while (!in.atEnd()) {
-               auto line = in.readLine();
+//           while (!in.atEnd()) {
+               auto line = in.readAll().trimmed();
                QRegExp rx("(\\ |\\n|\\n\r)");
                auto items = line.split(rx);
                if (items.size() % 3 != 0)
@@ -121,8 +122,8 @@ bool MainWindow::loadPositionFromFile()
                    }
                    new_pos[id] = Vertex2D(x, y);
                }
-           }
-
+//           }
+           inputFile.close();
            ui->graph->setPos(new_pos);
            return true;
         }
@@ -183,6 +184,7 @@ void MainWindow::loadFromKmers() {
             IGraph<string> *p_digraph = DeBrojinGraphGenerator::generate(stm);
             //TODO: for string graph or generic
             ui->graph->setGraph(p_digraph);
+            result.clear();
        } catch (DeBrujnGraphException& e) {
            QMessageBox messageBox;
            messageBox.critical(0, "Error", e.what());
@@ -193,16 +195,17 @@ void MainWindow::loadFromKmers() {
 
 void MainWindow::checkEuler() {
     Digraph<string>* graph = dynamic_cast<Digraph<string>*>(ui->graph->getGraph());
-    if (EulerianCercuit::isEulerian(graph)) {
-        vector<string> euCycle = EulerianCercuit::getEulerianCircuitVerticies(graph);
-        QString result = QString();
-        for (typename vector<string>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
-            result = result.append(QString::fromStdString(*it)).append(" -> ");
+    if (result.size() == 0)
+        result = EulerianCercuit::getEulerianCircuitVerticies(graph);
+
+    if (result.size() != 0) {
+        QString r = QString();
+        for (typename vector<string>::iterator it = result.begin(); it != result.end(); ++it) {
+            r = r.append(QString::fromStdString(*it)).append(" -> ");
         }
 
         QMessageBox messageBox;
-        messageBox.setWindowTitle("Эйлеров цикл найден");
-        messageBox.setText(result);
+        messageBox.critical(0, "Эйлеров цикл найден", r);
         messageBox.setFixedSize(500, 200);
     } else {
         QMessageBox messageBox;
