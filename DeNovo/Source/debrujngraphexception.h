@@ -4,6 +4,9 @@
 #include <exception>
 #include <string>
 
+/*
+ * This exception is thrown by De Bruin Graph
+ */
 class DeBrujnGraphException : public std::exception
 {
     const char * msg;

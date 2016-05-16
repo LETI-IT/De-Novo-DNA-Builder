@@ -4,10 +4,17 @@
 #include "digraph.h"
 #include "debrujngraphexception.h"
 
+/*
+ * Allow to generate De Brojin Graph by input stream
+ */
 class DeBrojinGraphGenerator
 {
 public:
 
+    /*
+     * Generate graph by input stream
+     * Method throws exception if stream has incorrect data
+     */
     static Digraph<string>* generate(istream& kmers) {
         string kmer;
         Digraph<string>* graph = new Digraph<string>();

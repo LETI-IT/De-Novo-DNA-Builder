@@ -14,12 +14,14 @@
 
 using namespace std;
 
+/*
+ * Implementation of digraph
+ */
 template<class T, class Allocator = allocator<T> >
 class Digraph : public AbstractDigraph<T, Allocator>
 {
 private:
     map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > >   digraph;
-//    map<T, vector<T>, less<T>, GraphAllocator > digraph;
     map<T, int> in_deg;
     map<T, int> out_deg;
 
@@ -29,11 +31,18 @@ public:
     Digraph();
     ~Digraph();
 
+    // Add link between two values
     void add_link(T v1, T v2);
+    // Read all values from stream and add links between them
     void add_links(istream& stm);
 
+    // Check whether two values are linked
     bool is_linked(T v1, T v2);
+
+    // Get list of adjacencies for input value
     vector<T> adjacency(T v);
+
+    // Check whether finish value is reached from start value
     bool is_reach(T start, T finish);
 
     int in_degree(T v);
@@ -43,9 +52,7 @@ public:
     AbstractIterator<T>* begin(TypeIterator);
     AbstractIterator<T>* end(TypeIterator);
 
-    bool hasNode(T v) {
-        return digraph.find(v) != digraph.end();
-    }
+    bool hasNode(T v);
 };
 
 #endif // DIGRAPH

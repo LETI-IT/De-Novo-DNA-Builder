@@ -4,11 +4,16 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Abstract item of graph
+ */
 template<class T>
 class AbstractComponent
 {
 private:
+    // print out information to the stream
     virtual ostream& do_print(ostream&) const = 0;
+    // equal two abstract items
     virtual bool do_equals(const AbstractComponent &other) const = 0;
 
 public:

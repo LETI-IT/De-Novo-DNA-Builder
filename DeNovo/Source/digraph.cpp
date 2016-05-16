@@ -145,6 +145,10 @@ AbstractIterator<T>* Digraph<T, Allocator>::end(TypeIterator type)
     };
 }
 
+template<class T, class Allocator>
+bool Digraph<T, Allocator>::hasNode(T v) {
+    return digraph.find(v) != digraph.end();
+}
 
 template class Digraph<int>;
 template class Digraph<string>;

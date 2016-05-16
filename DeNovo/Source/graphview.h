@@ -10,6 +10,7 @@
 #include <map>
 using namespace std;
 
+// Widget that allows to display graph and supports user manipulation by mouse
 class GraphView : public QWidget
 {
     Q_OBJECT

@@ -12,7 +12,6 @@ using namespace std;
 /**
  * @brief The IGraph class is interface for graph structure
  */
-
 template<class Vertex, class Allocator = allocator<Vertex> >
 class IGraph
 {

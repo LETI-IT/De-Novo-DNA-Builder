@@ -5,6 +5,9 @@
 #include "vertex.h"
 #include "graphallocator.h"
 
+/*
+ * Allow to iterate over vertexes
+ */
 template<class T>
 class VertexIterator : public AbstractIterator<T>
 {

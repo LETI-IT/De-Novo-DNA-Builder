@@ -3,6 +3,9 @@
 
 #include "abstractcomponent.h"
 
+/*
+ * Item of digraph which contains value
+ */
 template<class T>
 class Vertex : public AbstractComponent<T>
 {

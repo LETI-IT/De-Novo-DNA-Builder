@@ -5,6 +5,9 @@
 #include "edge.h"
 #include "graphallocator.h"
 
+/*
+ * Allow to iterate over edges
+ */
 template<class T>
 class EdgeIterator : public AbstractIterator<T>
 {

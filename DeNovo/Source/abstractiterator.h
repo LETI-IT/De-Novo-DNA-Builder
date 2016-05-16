@@ -6,6 +6,9 @@
 #include "abstractcomponent.h"
 using namespace std;
 
+/*
+ * Base class for all iterators
+ */
 template<class T>
 class AbstractIterator
 {

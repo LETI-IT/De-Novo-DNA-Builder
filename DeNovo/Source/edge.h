@@ -5,6 +5,9 @@
 #include "abstractcomponent.h"
 using namespace std;
 
+/*
+ * Edge item for graph. Allow to create relationship between two nodes
+ */
 template <class T>
 class Edge : public AbstractComponent<T>
 {
