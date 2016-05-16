@@ -193,7 +193,7 @@ void MainWindow::loadFromKmers() {
 
 void MainWindow::checkEuler() {
     Digraph<string>* graph = dynamic_cast<Digraph<string>*>(ui->graph->getGraph());
-    if (EulerianCercuit::isEulerian(graph)) {
+    if (EulerianCercuit::isd(graph)) {
         vector<string> euCycle = EulerianCercuit::getEulerianCircuitVerticies(graph);
         QString result = QString();
         for (typename vector<string>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
