@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QObject>
-#include "igraph.h"
+#include "abstractdigraph.h"
 #include "vertex2d.h"
 #include <QMouseEvent>
 #include <vector>

@@ -69,8 +69,7 @@ template<class T, class Allocator>
 AbstractDigraph<T, Allocator> *Digraph<T, Allocator>::get_transpose()
 {
     AbstractDigraph<T, Allocator>* tr_graph = new Digraph<T, Allocator>();
-    VertexIterator<T>::resetInit();
-    for(AbstractIterator<T> *v = begin(VERTEX); **v != **end(VERTEX); ++*v)
+    for(AbstractIterator<T> *v = begin(VERTEX); *v != &*end(VERTEX); ++*v)
     {
         Vertex<T>& verticle = static_cast<Vertex<T>&>(**v);
         vector<T> adjVerticles = adjacency(verticle.getValue());

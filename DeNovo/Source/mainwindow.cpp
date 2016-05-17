@@ -192,9 +192,9 @@ void MainWindow::loadFromKmers() {
 }
 
 void MainWindow::checkEuler() {
-    Digraph<string>* graph = dynamic_cast<Digraph<string>*>(ui->graph->getGraph());
-    if (EulerianCercuit::isEulerian(graph)) {
-        vector<string> euCycle = EulerianCercuit::getEulerianCircuitVerticies(graph);
+    AbstractDigraph<string>* graph = dynamic_cast<Digraph<string>*>(ui->graph->getGraph());
+    vector<string> euCycle = EulerianCercuit::getEulerianCircuitVerticies(graph);
+    if(euCycle.size()!=0) {
         QString result = QString();
         for (typename vector<string>::iterator it = euCycle.begin(); it != euCycle.end(); ++it) {
             result = result.append(QString::fromStdString(*it)).append(" -> ");
@@ -204,7 +204,8 @@ void MainWindow::checkEuler() {
         messageBox.setWindowTitle("Эйлеров цикл найден");
         messageBox.setText(result);
         messageBox.setFixedSize(500, 200);
-    } else {
+    }
+    else {
         QMessageBox messageBox;
         messageBox.critical(0, "Эйлеров цикл не найден", "Эйлеров цикл не найден");
         messageBox.setFixedSize(500, 200);

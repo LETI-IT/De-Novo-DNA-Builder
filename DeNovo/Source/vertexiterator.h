@@ -13,7 +13,6 @@ class VertexIterator : public AbstractIterator<T>
 {
 private:
     typename map<T, vector<T>, less<T>, GraphAllocator<pair<T, vector<T> > > >::iterator it_vtx; //vertex iterator.
-    static bool is_init;
 
 public:
     VertexIterator();
@@ -26,8 +25,6 @@ public:
     VertexIterator& operator--(int);
     bool operator==(const AbstractIterator<T> *it_other) const;
     bool operator!=(const AbstractIterator<T> *it_other) const;
-
-    static void resetInit();
 };
 
 #endif // VERTEXITERATOR_H

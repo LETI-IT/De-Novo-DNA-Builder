@@ -22,7 +22,7 @@ bool EulerianAdapter<T>::isEulerianCycle()
         return false;
 
     // Check if in degree and out degree of every vertex is same
-    for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
+    for(AbstractIterator<T> *it = graph->begin(VERTEX); *it != &*graph->end(VERTEX); ++*it)
     {
         Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
         if(graph->in_degree(vertex.getValue()) != graph->out_degree(vertex.getValue()))
@@ -37,6 +37,8 @@ vector<T> EulerianAdapter<T>::getEulerCircuit()
     if(isEulerianCycle()){
         return this->eulerianCircuit;
     }
+    else
+        return vector<T>();
 }
 
 template<typename T>
@@ -57,8 +59,7 @@ template<typename T>
 bool EulerianAdapter<T>::isSC()
 {
     map<T, bool> visited;
-    VertexIterator<T>::resetInit();
-    for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
+    for(AbstractIterator<T> *it = graph->begin(VERTEX); *it != &*graph->end(VERTEX); ++*it)
     {
        Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
        visited[vertex.getValue()] = false;
@@ -67,8 +68,7 @@ bool EulerianAdapter<T>::isSC()
     // Find the first vertex with non-zero degree
     Vertex<T> temp;
     Vertex<T>& nonZeroVert = temp;
-    VertexIterator<T>::resetInit();
-    for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
+    for(AbstractIterator<T> *it = graph->begin(VERTEX); *it != &*graph->end(VERTEX); ++*it)
     {
         nonZeroVert = static_cast<Vertex<T>&>(**it);
         if(graph->out_degree(nonZeroVert.getValue()) > 0)
@@ -79,8 +79,7 @@ bool EulerianAdapter<T>::isSC()
     this->eulerianCircuit.push_back(nonZeroVert.getValue());
     checked = true;
 
-    VertexIterator<T>::resetInit();
-    for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
+    for(AbstractIterator<T> *it = graph->begin(VERTEX); *it != &*graph->end(VERTEX); ++*it)
     {
         Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
         if(graph->out_degree(vertex.getValue()) > 0 && visited[vertex.getValue()] == false)
@@ -89,8 +88,7 @@ bool EulerianAdapter<T>::isSC()
 
     // Create a reversed graph
     AbstractDigraph<T>* gr = this->graph->get_transpose();
-    VertexIterator<T>::resetInit();
-    for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
+    for(AbstractIterator<T> *it = graph->begin(VERTEX); *it != &*graph->end(VERTEX); ++*it)
     {
        Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
        visited[vertex.getValue()] = false;
@@ -99,8 +97,7 @@ bool EulerianAdapter<T>::isSC()
     dfsUtil(gr, nonZeroVert.getValue(), visited);
     //Delete transposed graph
     delete gr;
-    VertexIterator<T>::resetInit();
-    for(AbstractIterator<T> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
+    for(AbstractIterator<T> *it = graph->begin(VERTEX); *it != &*graph->end(VERTEX); ++*it)
     {
         Vertex<T>& vertex = static_cast<Vertex<T>&>(**it);
         if(graph->out_degree(vertex.getValue()) > 0 && visited[vertex.getValue()] == false)
