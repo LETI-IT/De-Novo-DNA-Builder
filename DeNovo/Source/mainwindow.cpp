@@ -207,7 +207,8 @@ void MainWindow::checkEuler() {
         QMessageBox messageBox;
         messageBox.critical(0, "Эйлеров цикл найден", r);
         messageBox.setFixedSize(500, 200);
-    } else {
+    }
+    else {
         QMessageBox messageBox;
         messageBox.critical(0, "Эйлеров цикл не найден", "Эйлеров цикл не найден");
         messageBox.setFixedSize(500, 200);

@@ -33,7 +33,6 @@ public:
 
         string* items = new string[2];
         int index = 0;
-        VertexIterator<string>::resetInit();
         for(AbstractIterator<string> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it)
         {
             Vertex<string>& vertex = static_cast<Vertex<string>&>(**it);

@@ -24,6 +24,8 @@ private:
 
 private Q_SLOTS:
     void testCase1();
+    void testIterInt();
+    void testIterStr();
     void test_check_add_link();
     void test_adjacency();
     void test_reacheble();
@@ -57,6 +59,46 @@ TestSuiteTest::TestSuiteTest()
 void TestSuiteTest::testCase1()
 {
     QVERIFY2(true, "Failure");
+}
+
+void TestSuiteTest::testIterInt()
+{
+    cout << "##### " << __FUNCTION__ << " #####" << endl;
+    IGraph<int> *g = new Digraph<int>();
+    g->add_link(0,1);
+    g->add_link(1,2);
+    g->add_link(1,3);
+    g->add_link(1,4);
+    g->add_link(1,5);
+    g->add_link(5,1);
+    for(AbstractIterator<int> *it = g->begin(VERTEX); *it != &*g->end(VERTEX); ++*it) {
+        cout << framing::frame << **it << endl;
+    }
+
+    cout << "second foreach" << endl;
+    for(AbstractIterator<int> *it = g->begin(VERTEX); *it != &*g->end(VERTEX); ++*it) {
+        cout << framing::frame << **it << endl;
+    }
+}
+
+void TestSuiteTest::testIterStr()
+{
+    cout << "##### " << __FUNCTION__ << " #####" << endl;
+    IGraph<string> *g = new Digraph<string>();
+    g->add_link("one", "two");
+    g->add_link("three", "four");
+    g->add_link("five", "six");
+    g->add_link("seven", "eight");
+    g->add_link("nine", "ten");
+    g->add_link("eleven", "twelve");
+    for(AbstractIterator<string> *it = g->begin(VERTEX); *it != &*g->end(VERTEX); ++*it) {
+        cout << framing::frame << **it << endl;
+    }
+
+    cout << "second foreach" << endl;
+    for(AbstractIterator<string> *it = g->begin(VERTEX); *it != &*g->end(VERTEX); ++*it) {
+        cout << framing::frame << **it << endl;
+    }
 }
 
 void TestSuiteTest::test_check_add_link()
@@ -122,7 +164,7 @@ void TestSuiteTest::test_out_degree()
      g->add_link("1","4");
      g->add_link("1","5");
      g->add_link("5","1");
-     for(AbstractIterator<string> *it = g->begin(VERTEX); **it != **g->end(VERTEX); ++*it) {
+     for(AbstractIterator<string> *it = g->begin(VERTEX); *it != &*g->end(VERTEX); ++*it) {
          Vertex<string>& el = dynamic_cast<Vertex<string>&>(const_cast<AbstractComponent<string>&>(**it));
          qDebug() << QString::fromStdString(el.getValue());
          actualCnt++;
@@ -142,7 +184,7 @@ void TestSuiteTest::test_int_vertex()
      g->add_link(1,4);
      g->add_link(1,5);
      g->add_link(5,1);
-     for(AbstractIterator<int> *it = g->begin(VERTEX); **it != **g->end(VERTEX); ++*it) {
+     for(AbstractIterator<int> *it = g->begin(VERTEX); *it != &*g->end(VERTEX); ++*it) {
          cout << framing::frame << **it << endl;
      }
 }
@@ -210,12 +252,11 @@ void TestSuiteTest::graphTestForeach() {
     p_digraph->add_link(5,1);
 
     cout << "foreach edge" << endl;
-    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); **it != **p_digraph->end(EDGE); ++*it)
+    for(AbstractIterator<int> *it = p_digraph->begin(EDGE); *it != &*p_digraph->end(EDGE); ++*it)
     {
         cout << framing::frame << **it << endl;
     }
 
-    VertexIterator<int>::resetInit();
     cout << "foreach vertex" << endl;
     for(AbstractIterator<int> *it = p_digraph->begin(VERTEX); *it != &*p_digraph->end(VERTEX); ++*it)
     {
@@ -292,7 +333,7 @@ void TestSuiteTest::test_is_not_eulerian() {
 }
 
 void TestSuiteTest::test_is_eulerian() {
-    AbstractDigraph<int> *p_digraph = new Digraph<int>();
+    AbstractDigraph<string> *p_digraph = new Digraph<string>();
     std::istringstream stm("1 4 "
                            "4 5 "
                            "5 1 "
@@ -300,8 +341,11 @@ void TestSuiteTest::test_is_eulerian() {
                            "3 2 "
                            "2 1 ");
     p_digraph->add_links(stm);
-
+    vector<string> result = EulerianCercuit::getEulerianCircuitVerticies(p_digraph);
     QCOMPARE(EulerianCercuit::isEulerian(p_digraph), true);
+    for(string v: result) {
+        cout<<"V: "<<v;
+    }
 }
 
 

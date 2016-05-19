@@ -55,7 +55,7 @@ void GraphView::setGraph(IGraph<string> *igraph)
     this->graph = igraph;
     selectedIndex = "";
 
-    for(AbstractIterator<string> *it = graph->begin(VERTEX); **it != **graph->end(VERTEX); ++*it) {
+    for(AbstractIterator<string> *it = graph->begin(VERTEX); *it != &*graph->end(VERTEX); ++*it) {
         Vertex<string>& el = dynamic_cast<Vertex<string>&>(const_cast<AbstractComponent<string>&>(**it));
         string id = el.getValue();
         position[id] = Vertex2D(CIRCLE_RAD, CIRCLE_RAD);
@@ -69,7 +69,7 @@ void GraphView::setPos(map<string, Vertex2D> new_pos) {
     update();
 }
 
-IGraph<string>* GraphView::getGraph() {
+IGraph<string> *GraphView::getGraph() {
     return graph;
 }
 
